@@ -1,0 +1,78 @@
+
+GET {{api}}
+Content-Type: application/json
+
+###
+
+POST {{api}}/v1/currency
+Content-Type: application/json
+
+{
+  "name": "test",
+  "alias": "DEF",
+  "quotes": [
+    {
+      "alias": "USD",
+      "price": 5.0557
+    }
+  ]
+}
+
+###
+
+GET {{api}}/v1/currency
+Content-Type: application/json
+
+###
+
+GET {{api}}/v1/currency/ABD
+Content-Type: application/json
+
+###
+
+GET {{api}}/v1/currency/converter/ABD/10
+Content-Type: application/json
+
+###
+
+PUT {{api}}/v1/currency/ABD
+Content-Type: application/json
+
+{
+  "name": "Teste de atualizacao",
+  "alias": "ABD",
+  "quotes": [
+    {
+      "alias": "USD",
+      "price": 5.0557
+    }
+  ]
+}
+
+###
+DELETE {{api}}/v1/currency/BRL
+Content-Type: application/json
+
+
+###
+
+POST {{api}}/v1/currency/ABD/quotes
+Content-Type: application/json
+
+{
+  "alias": "BRL",
+  "price": 3.00
+}
+
+###
+PUT {{api}}/v1/currency/ABD/quotes/USD
+Content-Type: application/json
+
+{
+  "alias": "USD",
+  "price": 4.00
+}
+
+###
+
+DELETE {{api}}/v1/currency/ABD/quotes/USD
