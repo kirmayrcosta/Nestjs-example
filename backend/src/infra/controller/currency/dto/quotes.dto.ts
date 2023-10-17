@@ -1,8 +1,8 @@
-import {ApiProperty} from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class QuotesDto {
-    @ApiProperty()
-    alias: string;
-    @ApiProperty()
-    price: number;
+  @ApiProperty()
+  alias: string;
+  @ApiProperty()
+  price: number;
 }

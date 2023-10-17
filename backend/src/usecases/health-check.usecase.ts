@@ -1,9 +1,7 @@
 export class HealthCheckUseCase {
+  constructor() {}
 
-    constructor() {
-    }
-
-    exec(): string {
-        return "Hello World!"
-    }
+  exec(): string {
+    return 'Hello World!';
+  }
 }
