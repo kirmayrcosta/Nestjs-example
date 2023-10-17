@@ -15,19 +15,19 @@ describe('GET /v1/currency', () => {
     await app.init();
   });
 
-  it("When call to create a new currency Should return currency created ", () => {
-      expect(true).toBe(false)
+  it('When call to create a new currency Should return currency created ', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to create the same currency created Should return business error", () => {
-    expect(true).toBe(false)
+  it('When call to create the same currency created Should return business error', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to create currency with invalid data Should return validation error", () => {
-    expect(true).toBe(false)
+  it('When call to create currency with invalid data Should return validation error', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to create currency with invalid data Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to create currency with invalid data Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

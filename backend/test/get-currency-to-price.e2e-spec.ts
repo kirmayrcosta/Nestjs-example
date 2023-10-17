@@ -15,16 +15,15 @@ describe('GET /v1/currency/converter/:alias/:price', () => {
     await app.init();
   });
 
-  it("When call to get quote to currency Should return a list of quotes ", () => {
-      expect(true).toBe(false)
+  it('When call to get quote to currency Should return a list of quotes ', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to get quote to noexistent currency Should return a emptylist of quotes", () => {
-    expect(true).toBe(false)
+  it('When call to get quote to noexistent currency Should return a emptylist of quotes', () => {
+    expect(true).toBe(false);
   });
 
-
-  it("When call to get quote to noexistent currency Should Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to get quote to noexistent currency Should Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

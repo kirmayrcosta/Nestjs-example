@@ -15,7 +15,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it("Should return success when call request to heath-check", () => {
+  it('Should return success when call request to heath-check', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)

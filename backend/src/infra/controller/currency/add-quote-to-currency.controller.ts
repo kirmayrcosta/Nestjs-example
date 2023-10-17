@@ -1,11 +1,8 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Inject} from '@nestjs/common';
-import { CreateCurrencyDto } from './dto/create-currency.dto';
-import {FactoryModule} from "../../../factory.module";
-import {ApiOkResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {QuotesDto} from "./dto/quotes.dto";
-import {AddQuoteToCurrencyUseCase} from "../../../usecases/add-quote-to-currency.usecase";
-
-
+import { Controller, Post, Body, Param, Inject } from '@nestjs/common';
+import { FactoryModule } from '../../../factory.module';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { QuotesDto } from './dto/quotes.dto';
+import { AddQuoteToCurrencyUseCase } from '../../../usecases/add-quote-to-currency.usecase';
 
 @Controller('v1/currency')
 @ApiTags('currency')
@@ -17,10 +14,8 @@ export class AddQuoteToCurrencyController {
   ) {}
 
   @Post('/:alias/quotes')
-  async create(
-      @Param('alias') alias: string,
-      @Body() quoteDto: QuotesDto) {
-    const currency =  await this.addQuoteToCurrencyUseCase.exec(alias, quoteDto);
-    return "sucesso";
+  async create(@Param('alias') alias: string, @Body() quoteDto: QuotesDto) {
+    const currency = await this.addQuoteToCurrencyUseCase.exec(alias, quoteDto);
+    return currency;
   }
 }

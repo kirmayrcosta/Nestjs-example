@@ -1,9 +1,7 @@
-import {Controller, Param, Delete, Inject, Body} from '@nestjs/common';
-import {FactoryModule} from "../../../factory.module";
-import {ApiOkResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {DeleteCurrencyUseCase} from "../../../usecases/delete-currency.usecase";
-import {QuotesDto} from "./dto/quotes.dto";
-
+import { Controller, Param, Delete, Inject } from '@nestjs/common';
+import { FactoryModule } from '../../../factory.module';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { DeleteCurrencyUseCase } from '../../../usecases/delete-currency.usecase';
 
 @Controller('v1/currency')
 @ApiTags('currency')
@@ -11,12 +9,11 @@ import {QuotesDto} from "./dto/quotes.dto";
 export class DeleteCurrencyController {
   constructor(
     @Inject(FactoryModule.DELETE_CURRENCY_USE_CASE)
-    private readonly deleteCurrencyUseCase: DeleteCurrencyUseCase
+    private readonly deleteCurrencyUseCase: DeleteCurrencyUseCase,
   ) {}
 
-  @Delete(":alias")
+  @Delete(':alias')
   remove(@Param('alias') alias: string) {
     return this.deleteCurrencyUseCase.exec(alias);
   }
-
 }

@@ -15,19 +15,19 @@ describe('PUT /v1/currency/:alias', () => {
     await app.init();
   });
 
-  it("When call to update currency by alias Should return the success", () => {
-      expect(true).toBe(false)
+  it('When call to update currency by alias Should return the success', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to update nonexistent currency Should return no content ", () => {
-    expect(true).toBe(false)
+  it('When call to update nonexistent currency Should return no content ', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to update currency with invalid fields Should return Business Error ", () => {
-    expect(true).toBe(false)
+  it('When call to update currency with invalid fields Should return Business Error ', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to update currency by alias Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to update currency by alias Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

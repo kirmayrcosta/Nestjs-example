@@ -1,10 +1,8 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Inject} from '@nestjs/common';
+import { Controller, Post, Body, Inject } from '@nestjs/common';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
-import {CreateCurrecyUseCase} from "../../../usecases/create-currecy.usecase";
-import {FactoryModule} from "../../../factory.module";
-import {ApiOkResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-
-
+import { CreateCurrecyUseCase } from '../../../usecases/create-currecy.usecase';
+import { FactoryModule } from '../../../factory.module';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('v1/currency')
 @ApiTags('currency')
@@ -17,7 +15,7 @@ export class CreateCurrencyController {
 
   @Post()
   async create(@Body() createCurrencyDto: CreateCurrencyDto) {
-    const currency =  await this.createCurrencyUseCase.exec(createCurrencyDto);
+    const currency = await this.createCurrencyUseCase.exec(createCurrencyDto);
     return CreateCurrencyDto.output(currency);
   }
 }

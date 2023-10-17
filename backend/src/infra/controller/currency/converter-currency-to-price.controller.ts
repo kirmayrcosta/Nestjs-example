@@ -1,13 +1,11 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Inject} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Inject } from '@nestjs/common';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
-import {CreateCurrecyUseCase} from "../../../usecases/create-currecy.usecase";
-import {GetAllCurrencyUseCase} from "../../../usecases/get-all-currency.usecase";
-import {FactoryModule} from "../../../factory.module";
-import {ConverterCurrencyToPriceUseCase} from "../../../usecases/converter-currency-to-price.usecase";
-import {ApiOkResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {CurrencyToPriceOutputDto} from "./dto/currency-to-price.dto";
-
-
+import { CreateCurrecyUseCase } from '../../../usecases/create-currecy.usecase';
+import { GetAllCurrencyUseCase } from '../../../usecases/get-all-currency.usecase';
+import { FactoryModule } from '../../../factory.module';
+import { ConverterCurrencyToPriceUseCase } from '../../../usecases/converter-currency-to-price.usecase';
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CurrencyToPriceOutputDto } from './dto/currency-to-price.dto';
 
 @Controller('v1/currency')
 @ApiTags('currency')
@@ -24,7 +22,7 @@ export class ConverterCurrencyToPriceController {
 
   @Post()
   async create(@Body() createCurrencyDto: CreateCurrencyDto) {
-    const currency =  await this.createCurrencyUseCase.exec(createCurrencyDto);
+    const currency = await this.createCurrencyUseCase.exec(createCurrencyDto);
     return CreateCurrencyDto.output(currency);
   }
 
@@ -33,8 +31,9 @@ export class ConverterCurrencyToPriceController {
   })
   @Get('/converter/:alias/:price')
   converterCurrencyToPrice(
-      @Param('alias') alias: string,
-      @Param('price') price: number) {
+    @Param('alias') alias: string,
+    @Param('price') price: number,
+  ) {
     return this.converterCurrencyToPriceUseCase.exec(alias, price);
   }
 }

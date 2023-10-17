@@ -15,19 +15,19 @@ describe('POST /v1/currency/:alias/quotes', () => {
     await app.init();
   });
 
-  it("When call to update quote to currency Should return success", () => {
-      expect(true).toBe(false)
+  it('When call to update quote to currency Should return success', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to update quote to noexistent currency Should return no content", () => {
-    expect(true).toBe(false)
+  it('When call to update quote to noexistent currency Should return no content', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to update quote with invalid fields to currency Should return business error", () => {
-    expect(true).toBe(false)
+  it('When call to update quote with invalid fields to currency Should return business error', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to update quote currency Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to update quote currency Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

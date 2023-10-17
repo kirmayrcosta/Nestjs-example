@@ -15,15 +15,15 @@ describe('POST /v1/currency', () => {
     await app.init();
   });
 
-  it("When call to get currencies Should return a list of currencies", () => {
-      expect(true).toBe(false)
+  it('When call to get currencies Should return a list of currencies', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to get currencies Should return a empty list", () => {
-    expect(true).toBe(false)
+  it('When call to get currencies Should return a empty list', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to get currencies Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to get currencies Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

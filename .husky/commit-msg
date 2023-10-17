@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cd backend
-npm run lint
+npx --no -- commitlint --edit ${1}

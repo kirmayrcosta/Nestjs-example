@@ -15,15 +15,15 @@ describe('DELETE /v1/currency/:alias', () => {
     await app.init();
   });
 
-  it("When call to delete currency by alias Should return success with no content", () => {
-      expect(true).toBe(false)
+  it('When call to delete currency by alias Should return success with no content', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to delete noexistent currency by alias Should return no content", () => {
-    expect(true).toBe(false)
+  it('When call to delete noexistent currency by alias Should return no content', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to delete noexistent currency by alias return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to delete noexistent currency by alias return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

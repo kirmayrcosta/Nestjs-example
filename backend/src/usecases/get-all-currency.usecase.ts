@@ -1,9 +1,8 @@
-import {ICurrencyRepository} from "../domain/repository/ICurrencyRepository";
+import { ICurrencyRepository } from '../domain/repository/ICurrencyRepository';
 
 export class GetAllCurrencyUseCase {
-
-    constructor(private readonly currencyRepository: ICurrencyRepository) {}
-    exec(){
-        return this.currencyRepository.findAll()
-    }
+  constructor(private readonly currencyRepository: ICurrencyRepository) {}
+  exec() {
+    return this.currencyRepository.findAll();
+  }
 }

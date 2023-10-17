@@ -15,15 +15,15 @@ describe('DELETE /v1/currency/:alias/quotes', () => {
     await app.init();
   });
 
-  it("When call to remove quote to currency Should return success with status code no content", () => {
-      expect(true).toBe(false)
+  it('When call to remove quote to currency Should return success with status code no content', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to remove quote to noexistent currency Should return no content", () => {
-    expect(true).toBe(false)
+  it('When call to remove quote to noexistent currency Should return no content', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to remove quote currency Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to remove quote currency Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });

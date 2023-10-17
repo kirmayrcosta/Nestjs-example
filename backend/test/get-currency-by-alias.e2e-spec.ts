@@ -15,15 +15,15 @@ describe('GET /v1/currency/:alias', () => {
     await app.init();
   });
 
-  it("When call to get currency by alias Should return the currency", () => {
-      expect(true).toBe(false)
+  it('When call to get currency by alias Should return the currency', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to get nonexistent currency Should return no content ", () => {
-    expect(true).toBe(false)
+  it('When call to get nonexistent currency Should return no content ', () => {
+    expect(true).toBe(false);
   });
 
-  it("When call to get currency by alias Should return internal server error", () => {
-    expect(true).toBe(false)
+  it('When call to get currency by alias Should return internal server error', () => {
+    expect(true).toBe(false);
   });
 });
