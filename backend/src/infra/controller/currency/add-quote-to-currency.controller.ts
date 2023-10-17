@@ -2,8 +2,8 @@ import {Controller, Get, Post, Body, Patch, Param, Delete, Inject} from '@nestjs
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import {FactoryModule} from "../../../factory.module";
 import {ApiOkResponse, ApiResponse, ApiTags} from "@nestjs/swagger";
-import {AddQuoteToCurrencyUseCase} from "../../../usecases/create-quote-to-currecy.usecase";
 import {QuotesDto} from "./dto/quotes.dto";
+import {AddQuoteToCurrencyUseCase} from "../../../usecases/add-quote-to-currency.usecase";
 
 
 
@@ -21,6 +21,6 @@ export class AddQuoteToCurrencyController {
       @Param('alias') alias: string,
       @Body() quoteDto: QuotesDto) {
     const currency =  await this.addQuoteToCurrencyUseCase.exec(alias, quoteDto);
-    return CreateCurrencyDto.output(currency);
+    return "sucesso";
   }
 }

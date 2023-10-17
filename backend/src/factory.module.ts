@@ -9,8 +9,9 @@ import {GetCurrencyUseCase} from "./usecases/get-currency.usecase";
 import {UpdateCurrecyUseCase} from "./usecases/update-currecy.usecase";
 import {DeleteCurrencyUseCase} from "./usecases/delete-currency.usecase";
 import {RemoveQuoteToCurrencyUsecase} from "./usecases/remove-quote-to-currency.usecase";
-import {AddQuoteToCurrencyUseCase} from "./usecases/create-quote-to-currecy.usecase";
+
 import {UpdateQuoteToCurrencyUsecase} from "./usecases/update-quote-to-currency.usecase";
+import {AddQuoteToCurrencyUseCase} from "./usecases/add-quote-to-currency.usecase";
 
 @Module({
     imports: [

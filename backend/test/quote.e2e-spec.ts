@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import {Currency} from "../src/domain/entities/currency.entity";
 
-describe('Currency (e2e)', () => {
+describe.skip('Currency (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

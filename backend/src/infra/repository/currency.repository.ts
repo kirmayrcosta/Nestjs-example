@@ -12,8 +12,7 @@ export class CurrencyRepository implements ICurrencyRepository{
     constructor(@InjectModel('Currency') private currencyModel: Model<CurrencyModel>) {
     }
     async create(currency: Currency): Promise<any> {
-        const newCurrency = await new this.currencyModel(currency).save()
-        console.log(newCurrency)
+        const newCurrency = await this.currencyModel.create(currency)
         return newCurrency;
     }
 
