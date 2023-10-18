@@ -18,13 +18,14 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
   private method: string;
 
   constructor() {
-    let silent = process.env.NODE_ENV === 'TEST' ? true : false;
+    const silent = process.env.NODE_ENV === 'TEST' ? true : false;
     this._logger = createLogger({
-      transports: [new transports.Console({
-        silent
-      })],
+      transports: [
+        new transports.Console({
+          silent,
+        }),
+      ],
     });
-
   }
 
   setCtx(ctx: any) {

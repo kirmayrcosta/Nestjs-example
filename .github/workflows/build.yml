@@ -23,6 +23,14 @@ jobs:
         working-directory: ./backend
         run: npm install
 
-      - name: Lint code
+      - name: Executacao de lint de código
         working-directory: ./backend
         run: npm run lint
+
+      - name: Executacao de teste unitario
+        working-directory: ./backend
+        run: npm run test
+
+      - name: Executacao de teste end-to-end
+        working-directory: ./backend
+        run: npm run test:e2e
