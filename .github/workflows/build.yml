@@ -29,8 +29,13 @@ jobs:
 
       - name: Executacao de teste unitario
         working-directory: ./backend
-        run: npm run test
+        run: npm run test:cov
 
       - name: Executacao de teste end-to-end
         working-directory: ./backend
         run: npm run test:e2e
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
