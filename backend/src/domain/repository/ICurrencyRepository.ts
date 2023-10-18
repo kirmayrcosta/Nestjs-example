@@ -4,7 +4,6 @@ export interface ICurrencyRepository {
   create(currency: any): Promise<Currency>;
   findAll(): Promise<any>;
   findByAlias(alias: string): Promise<Currency>;
-  findById(alias: string): Promise<Currency>;
   update(alias: string, currency: Currency): Promise<any>;
   delete(alias: string): Promise<any>;
   addQuote(alias: string, quote: any): Promise<any>;

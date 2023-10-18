@@ -1,4 +1,4 @@
-import { Controller, Param, Delete, Inject } from '@nestjs/common';
+import { Controller, Param, Delete, Inject, HttpCode } from '@nestjs/common';
 import { FactoryModule } from '../../../factory.module';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteCurrencyUseCase } from '../../../usecases/delete-currency.usecase';
@@ -13,6 +13,7 @@ export class DeleteCurrencyController {
   ) {}
 
   @Delete(':alias')
+  @HttpCode(204)
   remove(@Param('alias') alias: string) {
     return this.deleteCurrencyUseCase.exec(alias);
   }

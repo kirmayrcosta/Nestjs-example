@@ -4,7 +4,7 @@ import {CurrencyRepositoryMock} from "../mock/currencyRepository.mock";
 
 
 
-describe.skip('AddQuoteToCurrencyUseCase', () => {
+describe('Given AddQuoteToCurrencyUseCase', () => {
   let addQuoteToCurrencyUseCase: AddQuoteToCurrencyUseCase;
   beforeEach(async () => {
     addQuoteToCurrencyUseCase = new AddQuoteToCurrencyUseCase(
@@ -12,12 +12,12 @@ describe.skip('AddQuoteToCurrencyUseCase', () => {
     );
   });
 
-  it('should be defined', async () => {
+  it('When call to add quote to currency Should return currency', async () => {
     const input = new QuotesDto();
     input.alias = 'USD';
     input.price = 1;
 
     const result = await addQuoteToCurrencyUseCase.exec('ABC', input);
-    expect(result).toBe('sucesso');
+    expect(result).toBe(undefined);
   });
 });

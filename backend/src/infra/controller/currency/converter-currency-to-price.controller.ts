@@ -17,10 +17,7 @@ export class ConverterCurrencyToPriceController {
     type: CurrencyToPriceOutputDto,
   })
   @Get('/converter/:alias/:price')
-  converterCurrencyToPrice(
-    @Param('alias') alias: string,
-    @Param('price') price: number,
-  ) {
+  calc(@Param('alias') alias: string, @Param('price') price: number) {
     return this.converterCurrencyToPriceUseCase.exec(alias, price);
   }
 }

@@ -1,8 +1,6 @@
 import { Quote } from './quote.entity';
 //format this code
 export class Currency {
-  idCurrency: string;
-
   name?: string;
 
   alias: string;
@@ -16,9 +14,6 @@ export class Currency {
     quotes: Array<Quote>;
   }) {
     this.alias = props.alias || '';
-    if (this.idCurrency) {
-      this.idCurrency = props.idCurrency;
-    }
 
     this.name = props.name || '';
     this.quotes = [];
@@ -40,6 +35,7 @@ export class Currency {
 
     return new Currency({
       alias: this.alias,
+      name: this.name,
       quotes: currencyQuotes,
     });
   }

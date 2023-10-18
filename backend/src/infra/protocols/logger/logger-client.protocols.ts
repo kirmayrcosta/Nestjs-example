@@ -42,10 +42,8 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
     };
   }
 
-  debug(context: string, message: string) {
-    if (process.env.NODE_ENV !== 'production') {
-      this._logger.debug(`[DEBUG] ${message}`, context);
-    }
+  debug(context: string, message: string, ctx?: any) {
+    this._logger.debug(`[DEBUG] [${context}] ${message}`, ctx);
   }
   log(message: string, context: string, data?: any) {
     const ctx: context = {};
@@ -64,14 +62,12 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
     this._logger.info(`[INFO] [${context}] ${message}`, { ...ctx, ...dataCtx });
   }
   error(context: string, message: string, trace?: string) {
-    this._logger.error(`[ERROR] ${message}`, trace, context);
+    this._logger.error(`[ERROR] [${context}] ${message}`, trace);
   }
   warn(context: string, message: string) {
-    this._logger.warn(`[WARN] ${message}`, context);
+    this._logger.warn(`[WARN] [${context}] ${message}`);
   }
   verbose(context: string, message: string) {
-    if (process.env.NODE_ENV !== 'production') {
-      this._logger.warn(`[VERBOSE] ${message}`, context);
-    }
+    this._logger.warn(`[VERBOSE] [${context}] ${message}`);
   }
 }

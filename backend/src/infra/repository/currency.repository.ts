@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CurrencyModel } from '../schema/currency.schema';
 import { Model } from 'mongoose';
 import { Quote } from '../../domain/entities/quote.entity';
+import { QuoteModel } from '../schema/quote.schema';
 
 @Injectable()
 export class CurrencyRepository implements ICurrencyRepository {
@@ -37,59 +38,43 @@ export class CurrencyRepository implements ICurrencyRepository {
   }
 
   async findByAlias(alias: string): Promise<Currency> {
-    const currency = await this.currencyModel.findOne({ alias: alias }).exec();
+    const currency = await this.currencyModel.findOne({ alias: alias });
 
     if (!currency) {
       return undefined;
     }
 
     return new Currency({
-      idCurrency: currency._id.toString(),
       alias: currency.alias,
-      quotes: currency.quotes,
-    });
-  }
-
-  async findById(alias: string): Promise<Currency> {
-    const currency = await this.currencyModel.findOne({ alias: alias }).exec();
-
-    return new Currency({
-      idCurrency: currency._id.toString(),
-      alias: currency.alias,
+      name: currency.name,
       quotes: currency.quotes,
     });
   }
 
   async update(alias: string, currency: Currency): Promise<any> {
-    const result = await this.currencyModel
-      .findOneAndUpdate({ alias: alias }, currency)
-      .exec();
-
-    return result;
+    await this.currencyModel.findOneAndUpdate({ alias: alias }, currency);
   }
 
   async delete(alias: string): Promise<any> {
-    const result = await this.currencyModel
-      .findOneAndDelete({ alias: alias })
-      .exec();
-
-    return result;
+    await this.currencyModel.findOneAndDelete({ alias: alias });
   }
 
   async addQuote(alias: string, quote: any): Promise<any> {
-    const result = await this.currencyModel.updateOne(
+    const quoteToUpdate: QuoteModel = {
+      alias: quote.alias,
+      price: quote.price,
+    };
+    await this.currencyModel.updateOne(
       { alias: alias },
-      { $push: { quotes: quote } },
+      { $push: { quotes: quoteToUpdate } },
     );
-    return result;
   }
 
   async removeQuote(alias: string, quoteAlias: string): Promise<any> {
-    const result = await this.currencyModel.updateOne(
+    await this.currencyModel.updateOne(
       { alias: alias },
       { $pull: { quotes: { alias: quoteAlias } } },
     );
-    return result;
   }
 
   async updateQuote(
@@ -97,7 +82,7 @@ export class CurrencyRepository implements ICurrencyRepository {
     quoteAlias: string,
     quote: Quote,
   ): Promise<any> {
-    const result = await this.currencyModel.updateOne(
+    await this.currencyModel.updateOne(
       { alias: alias, 'quotes.alias': quoteAlias },
       {
         $set: {
@@ -105,6 +90,5 @@ export class CurrencyRepository implements ICurrencyRepository {
         },
       },
     );
-    return result;
   }
 }

@@ -34,7 +34,10 @@ export class CreateCurrencyController {
       path: '/',
       method: 'GET',
     });
-    const currency = this.createCurrencyUseCase.exec(createCurrencyDto, ctx);
+    const currency = await this.createCurrencyUseCase.exec(
+      createCurrencyDto,
+      ctx,
+    );
     return currency;
   }
 }
