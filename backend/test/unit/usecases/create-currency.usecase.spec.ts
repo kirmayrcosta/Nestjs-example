@@ -9,7 +9,7 @@ import {CreateCurrencyDto} from "../../../src/infra/controller/currency/dto/crea
 
 
 
-describe('CreateCurrecyUseCase', () => {
+describe('Given CreateCurrecyUseCase', () => {
   let createCurrencyUseCase: CreateCurrecyUseCase;
   let currecyRepositoryMock = new  CurrencyRepositoryMock();
   beforeEach(async () => {
@@ -19,7 +19,7 @@ describe('CreateCurrecyUseCase', () => {
     );
   });
 
-  it('When call to create Currency should return currency created', async () => {
+  it('When call to create Currency Then return currency created', async () => {
 
     let input = new CreateCurrencyDto();
     let quote = new QuotesDto();

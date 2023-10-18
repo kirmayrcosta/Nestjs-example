@@ -3,7 +3,7 @@ import { Currency } from '../../../src/domain/entities/currency.entity';
 
 export class CurrencyRepositoryMock implements ICurrencyRepository {
   addQuote(alias: string, quote: any): Promise<any> {
-    return Promise.resolve('sucesso');
+    return Promise.resolve(undefined);
   }
 
   create(currency: any): Promise<any> {

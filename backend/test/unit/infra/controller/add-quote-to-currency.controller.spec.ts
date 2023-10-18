@@ -27,7 +27,7 @@ class UseCaseFactoryModule {
   }
 }
 
-describe.skip('addQuoteToCurrencyController', () => {
+describe('Given addQuoteToCurrencyController', () => {
   let addQuoteToCurrencyController;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -39,10 +39,10 @@ describe.skip('addQuoteToCurrencyController', () => {
     );
   });
 
-  it('should be defined', async () => {
+  it('When call to add quote to currency Should return success', async () => {
     const alias = 'ABC';
     const quoteDto = { alias: 'USD', value: 1 };
     const result = await addQuoteToCurrencyController.create(alias, quoteDto);
-    expect(result).toEqual('sucesso');
+    expect(result).toEqual(undefined);
   });
 });

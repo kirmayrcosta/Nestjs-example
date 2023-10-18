@@ -13,7 +13,7 @@ export class GetAllCurrencyController {
   ) {}
 
   @Get()
-  findAll() {
+  get() {
     return this.getAllCurrencyUseCase.exec();
   }
 }

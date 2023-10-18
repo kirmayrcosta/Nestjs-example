@@ -13,7 +13,7 @@ export class GetCurrencyController {
   ) {}
 
   @Get(':alias')
-  findById(@Param('alias') alias: string) {
+  find(@Param('alias') alias: string) {
     return this.getCurrencyUseCase.exec(alias);
   }
 }

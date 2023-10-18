@@ -20,7 +20,7 @@ Content-Type: application/json
 
 {
   "name": "test",
-  "alias": "DEA",
+  "alias": "BRL",
   "quotes": [
     {
       "alias": "USD",
@@ -41,12 +41,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/v1/currency/converter/ABD/10
+GET http://localhost:3000/v1/currency/converter/BRL/2
 Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/v1/currency/ABD
+PUT http://localhost:3000/v1/currency/BRL
 Content-Type: application/json
 
 {
@@ -71,16 +71,16 @@ POST http://localhost:3000/v1/currency/ABD/quotes
 Content-Type: application/json
 
 {
-  "alias": "BRL",
+  "alias": "ABC",
   "price": 3.00
 }
 
 ###
-PUT http://localhost:3000/v1/currency/ABD/quotes/USD
+PUT http://localhost:3000/v1/currency/ABD/quotes/ABC
 Content-Type: application/json
 
 {
-  "alias": "USD",
+  "alias": "BRL",
   "price": 4.00
 }
 

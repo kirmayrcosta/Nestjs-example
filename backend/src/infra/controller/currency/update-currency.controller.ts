@@ -14,14 +14,10 @@ export class UpdateCurrencyController {
   ) {}
 
   @Put(':alias')
-  async create(
+  async update(
     @Param('alias') alias: string,
     @Body() createCurrencyDto: CreateCurrencyDto,
   ) {
-    const currency = await this.updateCurrencyUseCase.exec(
-      alias,
-      createCurrencyDto,
-    );
-    return CreateCurrencyDto.output(currency);
+    return this.updateCurrencyUseCase.exec(alias, createCurrencyDto);
   }
 }

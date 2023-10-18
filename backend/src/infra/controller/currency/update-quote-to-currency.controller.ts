@@ -1,5 +1,4 @@
 import { Controller, Body, Param, Inject, Put } from '@nestjs/common';
-import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { FactoryModule } from '../../../factory.module';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateQuoteToCurrencyUsecase } from '../../../usecases/update-quote-to-currency.usecase';
@@ -20,11 +19,6 @@ export class UpdateQuoteToCurrencyController {
     @Param('quoteAlias') quoteAlias: string,
     @Body() quote: QuotesDto,
   ) {
-    const currency = await this.updateQuoteToCurrencyUsecase.exec(
-      alias,
-      quoteAlias,
-      quote,
-    );
-    return CreateCurrencyDto.output(currency);
+    return this.updateQuoteToCurrencyUsecase.exec(alias, quoteAlias, quote);
   }
 }
