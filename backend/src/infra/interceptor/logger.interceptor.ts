@@ -20,27 +20,21 @@ export class LoggingInterceptor implements NestInterceptor {
     request.headers['x-request-id'] = v1();
     request.headers['x-correlation-id'] =
       request.headers['x-correlation-id'] || v1();
+    request.headers['x-time'] = Date.now();
     this.logger.setCtx({
       requestId: request.headers['x-request-id'],
       correlationId: request.headers['x-correlation-id'],
       path: request.path.toUpperCase(),
       method: request.method.toUpperCase(),
     });
-    this.logger.log(
-      `Incoming Request on ${request.path}`,
-      `method=${request.method}`,
-    );
+    this.logger.log(`Request Start`, `${request.method}:${request.path}`);
 
     return next.handle().pipe(
       tap(() => {
-        this.logger.log(
-          `End Request for ${request.path}`,
-          `method=${request.method} duration=${Date.now() - now}ms`,
-          {
-            statusCode: httpContext.getResponse().statusCode,
-            duration: Date.now() - now,
-          },
-        );
+        this.logger.log(`Request end`, `${request.method}:${request.path}`, {
+          statusCode: httpContext.getResponse().statusCode,
+          duration: Date.now() - now,
+        });
       }),
     );
   }

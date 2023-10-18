@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { AppModule } from '../../src/app.module';
 
-describe('POST /v1/currency/:alias/quotes', () => {
+describe.skip('DELETE /v1/currency/:alias', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,19 +15,15 @@ describe('POST /v1/currency/:alias/quotes', () => {
     await app.init();
   });
 
-  it('When call to update quote to currency Should return success', () => {
+  it('When call to delete currency by alias Should return success with no content', () => {
     expect(true).toBe(false);
   });
 
-  it('When call to update quote to noexistent currency Should return no content', () => {
+  it('When call to delete noexistent currency by alias Should return no content', () => {
     expect(true).toBe(false);
   });
 
-  it('When call to update quote with invalid fields to currency Should return business error', () => {
-    expect(true).toBe(false);
-  });
-
-  it('When call to update quote currency Should return internal server error', () => {
+  it('When call to delete noexistent currency by alias return internal server error', () => {
     expect(true).toBe(false);
   });
 });

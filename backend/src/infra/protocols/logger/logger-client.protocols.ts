@@ -18,8 +18,13 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
   private method: string;
 
   constructor() {
+    const silent = process.env.NODE_ENV === 'TEST' ? true : false;
     this._logger = createLogger({
-      transports: [new transports.Console()],
+      transports: [
+        new transports.Console({
+          silent,
+        }),
+      ],
     });
   }
 
@@ -28,6 +33,13 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
     this.correlationId = ctx.correlationId;
     this.path = ctx.path;
     this.method = ctx.method;
+
+    return {
+      requestId: this.requestId,
+      correlationId: this.correlationId,
+      path: this.path,
+      method: this.method,
+    };
   }
 
   debug(context: string, message: string) {
