@@ -87,7 +87,7 @@
       ",!**/node_modules/**",
       "!**/test/**"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node"
   },
   "config": {
