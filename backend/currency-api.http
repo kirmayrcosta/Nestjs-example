@@ -8,6 +8,17 @@ POST {{api}}/v1/currency
 Content-Type: application/json
 
 {
+  "name": "Real",
+  "alias": "BR"
+}
+
+
+###
+
+POST {{api}}/v1/currency
+Content-Type: application/json
+
+{
   "name": "test",
   "alias": "DEF",
   "quotes": [
