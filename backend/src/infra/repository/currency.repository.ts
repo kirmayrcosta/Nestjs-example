@@ -11,9 +11,13 @@ export class CurrencyRepository implements ICurrencyRepository {
   constructor(
     @InjectModel('Currency') private currencyModel: Model<CurrencyModel>,
   ) {}
-  async create(currency: Currency): Promise<any> {
+  async create(currency: Currency): Promise<Currency> {
     const newCurrency = await this.currencyModel.create(currency);
-    return newCurrency;
+    return new Currency({
+      name: newCurrency.name,
+      alias: newCurrency.alias,
+      quotes: newCurrency.quotes,
+    });
   }
 
   async findAll(): Promise<Array<Currency>> {
@@ -34,6 +38,11 @@ export class CurrencyRepository implements ICurrencyRepository {
 
   async findByAlias(alias: string): Promise<Currency> {
     const currency = await this.currencyModel.findOne({ alias: alias }).exec();
+
+    if (!currency) {
+      return undefined;
+    }
+
     return new Currency({
       idCurrency: currency._id.toString(),
       alias: currency.alias,

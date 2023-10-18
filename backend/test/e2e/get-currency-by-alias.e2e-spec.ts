@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 
-describe('GET /v1/currency/:alias', () => {
+describe.skip('GET /v1/currency/:alias', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

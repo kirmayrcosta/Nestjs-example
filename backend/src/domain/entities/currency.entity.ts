@@ -19,9 +19,8 @@ export class Currency {
     if (this.idCurrency) {
       this.idCurrency = props.idCurrency;
     }
-    if (this.name) {
-      this.name = props.name || '';
-    }
+
+    this.name = props.name || '';
     this.quotes = [];
     if (props.quotes && props.quotes.length) {
       props.quotes.forEach((quote) => {

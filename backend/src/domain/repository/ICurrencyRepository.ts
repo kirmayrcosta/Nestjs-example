@@ -1,7 +1,7 @@
 import { Currency } from '../entities/currency.entity';
 
 export interface ICurrencyRepository {
-  create(currency: any): Promise<any>;
+  create(currency: any): Promise<Currency>;
   findAll(): Promise<any>;
   findByAlias(alias: string): Promise<Currency>;
   findById(alias: string): Promise<Currency>;

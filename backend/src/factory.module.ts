@@ -13,6 +13,7 @@ import { RemoveQuoteToCurrencyUsecase } from './usecases/remove-quote-to-currenc
 import { UpdateQuoteToCurrencyUsecase } from './usecases/update-quote-to-currency.usecase';
 import { AddQuoteToCurrencyUseCase } from './usecases/add-quote-to-currency.usecase';
 import { LoggerClientModule } from './infra/protocols/logger/logger-client.module';
+import { LoggerClientProtocols } from './infra/protocols/logger/logger-client.protocols';
 
 @Module({
   imports: [RepositoriesModule],
@@ -43,9 +44,11 @@ export class FactoryModule {
         },
         {
           provide: FactoryModule.CREATE_CURRENCY_USE_CASE,
-          inject: [CurrencyRepository],
-          useFactory: (currencyRepository: CurrencyRepository) =>
-            new CreateCurrecyUseCase(currencyRepository),
+          inject: [CurrencyRepository, LoggerClientProtocols],
+          useFactory: (
+            currencyRepository: CurrencyRepository,
+            logger: LoggerClientProtocols,
+          ) => new CreateCurrecyUseCase(currencyRepository, logger),
         },
         {
           inject: [CurrencyRepository],

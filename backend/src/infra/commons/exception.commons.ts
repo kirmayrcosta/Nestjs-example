@@ -32,8 +32,6 @@ export class AllExceptionFilter implements ExceptionFilter {
     const responseData = {
       ...{
         statusCode: status,
-        timestamp: new Date().toISOString(),
-        path: request.url,
       },
       ...message,
     };

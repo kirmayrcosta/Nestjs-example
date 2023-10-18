@@ -32,7 +32,7 @@ describe('HeathCheck', () => {
   });
 
   it('should be defined', () => {
-    const result = healthCheckController.getHello();
+    const result = healthCheckController.health();
     expect(result).toBe('Hello World!');
   });
 });

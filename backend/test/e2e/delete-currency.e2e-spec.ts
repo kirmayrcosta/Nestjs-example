@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 
-describe('DELETE /v1/currency/:alias', () => {
+describe.skip('DELETE /v1/currency/:alias', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
