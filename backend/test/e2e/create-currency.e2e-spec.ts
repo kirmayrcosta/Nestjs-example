@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { AppModule } from '../../src/app.module';
 
-describe('POST /v1/currency/:alias/quotes', () => {
+describe('POST /v1/currency', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,19 +15,15 @@ describe('POST /v1/currency/:alias/quotes', () => {
     await app.init();
   });
 
-  it('When call to add quote to currency Should return success with status code created', () => {
+  it('When call to get currencies Should return a list of currencies', () => {
     expect(true).toBe(false);
   });
 
-  it('When call to add quote to noexistent currency Should return no content', () => {
+  it('When call to get currencies Should return a empty list', () => {
     expect(true).toBe(false);
   });
 
-  it('When call to add quote with invalid fields to currency Should return business error', () => {
-    expect(true).toBe(false);
-  });
-
-  it('When call to add quote currency Should return internal server error', () => {
+  it('When call to get currencies Should return internal server error', () => {
     expect(true).toBe(false);
   });
 });

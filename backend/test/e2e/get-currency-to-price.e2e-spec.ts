@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+import { AppModule } from '../../src/app.module';
 
-describe('POST /v1/currency', () => {
+describe('GET /v1/currency/converter/:alias/:price', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,15 +15,15 @@ describe('POST /v1/currency', () => {
     await app.init();
   });
 
-  it('When call to get currencies Should return a list of currencies', () => {
+  it('When call to get quote to currency Should return a list of quotes ', () => {
     expect(true).toBe(false);
   });
 
-  it('When call to get currencies Should return a empty list', () => {
+  it('When call to get quote to noexistent currency Should return a emptylist of quotes', () => {
     expect(true).toBe(false);
   });
 
-  it('When call to get currencies Should return internal server error', () => {
+  it('When call to get quote to noexistent currency Should Should return internal server error', () => {
     expect(true).toBe(false);
   });
 });

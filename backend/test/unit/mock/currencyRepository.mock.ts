@@ -1,5 +1,5 @@
-import { ICurrencyRepository } from '../../domain/repository/ICurrencyRepository';
-import { Currency } from '../../domain/entities/currency.entity';
+import { ICurrencyRepository } from '../../../src/domain/repository/ICurrencyRepository';
+import { Currency } from '../../../src/domain/entities/currency.entity';
 
 export class CurrencyRepositoryMock implements ICurrencyRepository {
   addQuote(alias: string, quote: any): Promise<any> {

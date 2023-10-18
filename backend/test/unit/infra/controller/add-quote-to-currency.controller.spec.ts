@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DynamicModule } from '@nestjs/common';
-import { AddQuoteToCurrencyController } from './add-quote-to-currency.controller';
-import { IAddQuoteToCurrencyUsecase } from '../../../usecases/add-quote-to-currency.usecase';
-import { QuotesDto } from './dto/quotes.dto';
+import { AddQuoteToCurrencyController } from '../../../../src/infra/controller/currency/add-quote-to-currency.controller';
+import { IAddQuoteToCurrencyUsecase } from '../../../../src/usecases/add-quote-to-currency.usecase';
+import { QuotesDto } from '../../../../src/infra/controller/currency/dto/quotes.dto';
 const ADD_QUOTATION_TO_CURRENCY_USE_CASE = 'AddQuotationToCurrencyUseCase';
 
 class AddQuoteToCurrencyUseCaseMock implements IAddQuoteToCurrencyUsecase {

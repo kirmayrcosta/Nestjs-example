@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HealthCheckUseCase } from '../../../usecases/health-check.usecase';
+import { HealthCheckUseCase } from '../../../../src/usecases/health-check.usecase';
 import { DynamicModule } from '@nestjs/common';
-import { HealthCheckController } from '../health-check.controller';
+import { HealthCheckController } from '../../../../src/infra/controller/health-check.controller';
 
 const HEALTH_CHECK_USE_CASE = 'HealthCheckUseCase';
 class UseCaseFactoryModule {

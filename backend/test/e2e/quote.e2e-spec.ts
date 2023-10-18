@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
-import { Currency } from '../src/domain/entities/currency.entity';
+import { AppModule } from '../../src/app.module';
+import { Currency } from '../../src/domain/entities/currency.entity';
 
 describe.skip('Currency (e2e)', () => {
   let app: INestApplication;
