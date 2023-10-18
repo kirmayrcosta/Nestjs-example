@@ -12,6 +12,7 @@ import { RemoveQuoteToCurrencyUsecase } from './usecases/remove-quote-to-currenc
 
 import { UpdateQuoteToCurrencyUsecase } from './usecases/update-quote-to-currency.usecase';
 import { AddQuoteToCurrencyUseCase } from './usecases/add-quote-to-currency.usecase';
+import { LoggerClientModule } from './infra/protocols/logger/logger-client.module';
 
 @Module({
   imports: [RepositoriesModule],
@@ -34,6 +35,7 @@ export class FactoryModule {
   static register(): DynamicModule {
     return {
       module: FactoryModule,
+      imports: [LoggerClientModule],
       providers: [
         {
           provide: FactoryModule.HEALTH_CHECK_USE_CASE,

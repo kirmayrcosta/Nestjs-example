@@ -10,9 +10,10 @@ import { DeleteCurrencyController } from './currency/delete-currency.controller'
 import { AddQuoteToCurrencyController } from './currency/add-quote-to-currency.controller';
 import { UpdateQuoteToCurrencyController } from './currency/update-quote-to-currency.controller';
 import { RemoveQuoteToCurrencyController } from './currency/remove-quote-to-currency.controller';
+import { LoggerClientModule } from '../protocols/logger/logger-client.module';
 
 @Module({
-  imports: [FactoryModule.register()],
+  imports: [FactoryModule.register(), LoggerClientModule],
   controllers: [
     HealthCheckController,
     ConverterCurrencyToPriceController,
