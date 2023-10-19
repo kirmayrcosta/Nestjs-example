@@ -71,7 +71,7 @@ describe('PUT /v1/currency/:alias', () => {
         });
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      "message": "Currency not found",
+      "message":  "Currency not found",
       "error": "Bad Request",
       "statusCode": 400
     })

@@ -85,7 +85,7 @@ describe('DELETE /v1/currency/:alias/quotes', () => {
         .set('Accept', 'application/json')
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      "message": "Currency not found",
+      "message": "Quote not found",
       "error": "Bad Request",
       "statusCode": 400
     })

@@ -13,7 +13,7 @@ export class RemoveQuoteToCurrencyUsecase {
     }
 
     if (!getCurrency.quotes.find((quote) => quote.alias === quoteAlias)) {
-      throw new BadRequestException('Currency not found');
+      throw new BadRequestException('Quote not found');
     }
     await this.currencyRepository.removeQuote(alias, quoteAlias);
   }

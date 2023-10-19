@@ -1,17 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../src/app.module';
+import {AppModuleMock} from "./mock/app.module.mock";
+import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [AppModuleMock],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = module.createNestApplication();
+    app.useGlobalPipes(ValidationPipeCommons());
     await app.init();
   });
 

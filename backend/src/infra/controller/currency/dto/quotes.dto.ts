@@ -12,4 +12,8 @@ export class QuotesDto {
   @IsNumber()
   @IsNotEmpty()
   price: number;
+
+  @ApiProperty()
+  @IsString()
+  name: string;
 }

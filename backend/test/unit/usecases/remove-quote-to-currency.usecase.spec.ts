@@ -1,31 +1,44 @@
-import {QuotesDto} from '../../../src/infra/controller/currency/dto/quotes.dto';
-import {AddQuoteToCurrencyUseCase} from '../../../src/usecases/add-quote-to-currency.usecase';
-import {CurrencyRepositoryMock} from "../mock/currencyRepository.mock";
-import {CreateCurrecyUseCase} from "../../../src/usecases/create-currecy.usecase";
-import {BadRequestException, LoggerService} from "@nestjs/common";
-import {ILogger} from "../../../src/domain/protocols/ILogger";
-import {LoggerClientMock} from "../mock/loggerClientProtocols.mock";
-import {CreateCurrencyDto} from "../../../src/infra/controller/currency/dto/create-currency.dto";
-import {ConverterCurrencyToPriceUseCase} from "../../../src/usecases/converter-currency-to-price.usecase";
-import {GetAllCurrencyUseCase} from "../../../src/usecases/get-all-currency.usecase";
-import {GetCurrencyUseCase} from "../../../src/usecases/get-currency.usecase";
 import {RemoveQuoteToCurrencyUsecase} from "../../../src/usecases/remove-quote-to-currency.usecase";
+import {CurrencyRepository} from "../../../src/infra/repository/currency.repository";
 
+const findByAlias = jest.fn().mockReturnValue({
+    "_id": "652839e44370f34a593cc2f8",
+    "name": "Real Brasileiro",
+    "alias": "BRL",
+    "quotes": [{
+        "alias": "USD",
+        "name": "Dólar Comercial",
+        "price": 5.0557}],
 
-describe('Given getCurrencyUseCase', () => {
+})
+
+const modelMock = {};
+
+jest.mock("../../../src/infra/repository/currency.repository", () => {
+    return {
+        CurrencyRepository: jest.fn().mockImplementation(() => {
+            return {
+                findByAlias,
+                removeQuote: jest.fn().mockReturnValue({}),
+            };
+        }),
+    };
+});
+
+describe('Given RemoveQuoteToCurrencyUsecase', () => {
     let removeQuoteToCurrencyUsecase: RemoveQuoteToCurrencyUsecase;
+    let currencyRepositoryMock: CurrencyRepository;
 
-    const currencyRepositoryMock = {
-        removeQuote: jest.fn(),
-    }
 
     beforeEach(async () => {
+        currencyRepositoryMock = new CurrencyRepository(modelMock as any);
+
         removeQuoteToCurrencyUsecase = new RemoveQuoteToCurrencyUsecase(
             currencyRepositoryMock as any,
         );
     });
 
-    it('When call to get currency by alias Then return a currency', async () => {
+    it('When call to remove currency by alias Then return success', async () => {
 
         const mock =
             {
@@ -45,6 +58,61 @@ describe('Given getCurrencyUseCase', () => {
 
         await removeQuoteToCurrencyUsecase.exec("BRL", "USD");
         expect(currencyRepositoryMock.removeQuote).toBeCalledWith("BRL", "USD");
+    });
+
+    it('When call to remove quote to no existence currency by alias Then return Error', async () => {
+
+        const mock =
+            {
+                "alias": "ABD",
+                "name": "",
+                "quotes": [
+                    {
+                        "alias": "USD",
+                        "price": 5.0557
+                    },
+                    {
+                        "alias": "BRL",
+                        "price": 1
+                    }
+                ]
+            }
+        findByAlias.mockResolvedValue(null);
+
+        expect(removeQuoteToCurrencyUsecase.exec("BRL", "USD")).rejects.toThrow(new Error('Currency not found'));
+
+    });
+
+    it('When call to remove no existence quote to currency by alias Then return Error', async () => {
+
+        const mock =
+            {
+                "alias": "ABD",
+                "name": "",
+                "quotes": [
+                    {
+                        "alias": "USD",
+                        "price": 5.0557
+                    },
+                    {
+                        "alias": "BRL",
+                        "price": 1
+                    }
+                ]
+            }
+        findByAlias.mockResolvedValue({
+            "_id": "652839e44370f34a593cc2f8",
+            "name": "Real Brasileiro",
+            "alias": "BRL",
+            "quotes": [{
+                "alias": "USD",
+                "name": "Dólar Comercial",
+                "price": 5.0557}],
+
+        });
+
+        expect(removeQuoteToCurrencyUsecase.exec("BRL", "ABC")).rejects.toThrow(new Error('Quote not found'));
+
     });
 
 });

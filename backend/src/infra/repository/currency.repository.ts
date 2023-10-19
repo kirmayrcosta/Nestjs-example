@@ -60,6 +60,7 @@ export class CurrencyRepository implements ICurrencyRepository {
 
   async addQuote(alias: string, quote: any): Promise<any> {
     const quoteToUpdate = new QuoteModel();
+    quoteToUpdate.name = quote.name;
     quoteToUpdate.alias = quote.alias;
     quoteToUpdate.price = quote.price;
     await this.currencyModel.updateOne(

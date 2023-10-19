@@ -1,20 +1,3 @@
-// const logger = {
-//     debug: jest.fn(),
-//     info: jest.fn(),
-//     error: jest.fn(),
-//     warn: jest.fn(),
-// };
-
-// IMPORTANT First mock winston
-// jest.mock("winston", () => ({
-//     createLogger: jest.fn().mockReturnValue(logger),
-//     transports: {
-//         Console: jest.fn()
-//     }
-// }));
-
-// IMPORTANT import the mock after
-// import * as winston from "winston";
 
 import ValidationPipeCommons from "../../../../src/infra/commons/validation-pipe.commons";
 import {BadRequestException} from "@nestjs/common";
@@ -23,7 +6,6 @@ import {BadRequestException} from "@nestjs/common";
 describe('Given ValidationPipeCommons', () => {
     let validationPipeCommons: any;
     beforeEach(async () => {
-  //      loggerClientProtocols = new LoggerClientProtocols();
         validationPipeCommons = ValidationPipeCommons();
     });
         it('When call to validation Pipe Should return Bad request result', async () => {

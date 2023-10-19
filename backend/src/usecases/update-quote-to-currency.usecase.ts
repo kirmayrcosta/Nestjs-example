@@ -16,7 +16,7 @@ export class UpdateQuoteToCurrencyUsecase {
     }
 
     if (!getCurrency.quotes.find((quote) => quote.alias === quoteAlias)) {
-      throw new BadRequestException('Quote not found');
+      throw new BadRequestException('Quote already exists');
     }
 
     await this.currencyRepository.updateQuote(alias, quoteAlias, quote);

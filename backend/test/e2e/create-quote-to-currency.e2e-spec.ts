@@ -43,6 +43,7 @@ describe('Given POST /v1/currency/:alias/quotes', () => {
       "name": "Brazilian Real",
       "quotes": [
         {
+        "name": "United States Dollar",
           "alias": "USD",
           "price": 5
         }

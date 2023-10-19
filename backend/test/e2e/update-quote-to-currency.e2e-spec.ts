@@ -142,7 +142,7 @@ describe('Given PUT /v1/currency/:alias/quotes', () => {
         });
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
-      "message": "Quote not found",
+      "message": "Quote already exists",
       "error": "Bad Request",
       "statusCode": 400
     })
