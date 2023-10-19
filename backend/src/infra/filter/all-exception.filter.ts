@@ -9,12 +9,11 @@ import { LoggerClientProtocols } from '../protocols/logger/logger-client.protoco
 
 interface IError {
   message: string;
-  code_error: string;
 }
 
 @Catch()
 export class AllExceptionFilter implements ExceptionFilter {
-  constructor(private readonly logger: LoggerClientProtocols) {}
+  constructor(public readonly logger: LoggerClientProtocols) {}
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
@@ -27,7 +26,7 @@ export class AllExceptionFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException
         ? (exception.getResponse() as IError)
-        : { message: (exception as Error).message, code_error: null };
+        : { message: (exception as Error).message };
 
     const responseData = {
       ...{
@@ -49,16 +48,14 @@ export class AllExceptionFilter implements ExceptionFilter {
     if (status === 500) {
       this.logger.error(
         `End Request for ${request.path}`,
-        `method=${request.method} status=${status} code_error=${
-          message.code_error ? message.code_error : null
-        } message=${message.message ? message.message : null}`,
+        `method=${request.method} status=${status}
+         message=${message.message ? message.message : null}`,
         status >= 500 ? exception.stack : '',
       );
     } else {
       this.logger.warn(
         `Request end for ${request.path}`,
-        `method=${request.method} status=${status} code_error=${
-          message.code_error ? message.code_error : null
+        `method=${request.method} status=${status}
         } message=${message.message ? message.message : null}`,
       );
     }

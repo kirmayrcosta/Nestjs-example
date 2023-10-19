@@ -13,7 +13,7 @@ export class Currency {
     alias: string;
     quotes: Array<Quote>;
   }) {
-    this.alias = props.alias || '';
+    this.alias = props.alias;
 
     this.name = props.name || '';
     this.quotes = [];

@@ -19,8 +19,8 @@ POST http://localhost:3000/v1/currency
 Content-Type: application/json
 
 {
-  "name": "test",
-  "alias": "BRL",
+  "name": "",
+  "alias": "",
   "quotes": [
     {
       "alias": "USD",

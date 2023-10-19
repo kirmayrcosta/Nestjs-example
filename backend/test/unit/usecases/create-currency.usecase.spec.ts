@@ -1,9 +1,7 @@
 import { QuotesDto } from '../../../src/infra/controller/currency/dto/quotes.dto';
-import { AddQuoteToCurrencyUseCase } from '../../../src/usecases/add-quote-to-currency.usecase';
 import {CurrencyRepositoryMock} from "../mock/currencyRepository.mock";
 import {CreateCurrecyUseCase} from "../../../src/usecases/create-currecy.usecase";
-import {BadRequestException, LoggerService} from "@nestjs/common";
-import {ILogger} from "../../../src/domain/protocols/ILogger";
+import {BadRequestException} from "@nestjs/common";
 import {LoggerClientMock} from "../mock/loggerClientProtocols.mock";
 import {CreateCurrencyDto} from "../../../src/infra/controller/currency/dto/create-currency.dto";
 

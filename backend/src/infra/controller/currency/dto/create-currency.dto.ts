@@ -1,4 +1,3 @@
-import { Currency } from '../../../../domain/entities/currency.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { QuotesDto } from './quotes.dto';
 import {
@@ -30,10 +29,4 @@ export class CreateCurrencyDto {
   @IsArray()
   @IsOptional()
   quotes: Array<QuotesDto>;
-  static output(currency: Currency) {
-    return {
-      alias: currency.alias,
-      quotes: currency.quotes,
-    };
-  }
 }
