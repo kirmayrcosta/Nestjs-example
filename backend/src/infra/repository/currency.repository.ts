@@ -4,7 +4,6 @@ import { Currency } from '../../domain/entities/currency.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { CurrencyModel } from '../schema/currency.schema';
 import { Model } from 'mongoose';
-import { Quote } from '../../domain/entities/quote.entity';
 import { QuoteModel } from '../schema/quote.schema';
 
 @Injectable()
@@ -60,10 +59,9 @@ export class CurrencyRepository implements ICurrencyRepository {
   }
 
   async addQuote(alias: string, quote: any): Promise<any> {
-    const quoteToUpdate: QuoteModel = {
-      alias: quote.alias,
-      price: quote.price,
-    };
+    const quoteToUpdate = new QuoteModel();
+    quoteToUpdate.alias = quote.alias;
+    quoteToUpdate.price = quote.price;
     await this.currencyModel.updateOne(
       { alias: alias },
       { $push: { quotes: quoteToUpdate } },
@@ -80,7 +78,7 @@ export class CurrencyRepository implements ICurrencyRepository {
   async updateQuote(
     alias: string,
     quoteAlias: string,
-    quote: Quote,
+    quote: QuoteModel,
   ): Promise<any> {
     await this.currencyModel.updateOne(
       { alias: alias, 'quotes.alias': quoteAlias },

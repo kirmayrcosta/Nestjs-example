@@ -2,7 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {INestApplication} from '@nestjs/common';
 import * as request from 'supertest';
 import {AppModuleMock} from "./mock/app.module.mock";
-import PipeValidationCommons from "../../src/infra/commons/validation-pipe.commons";
+import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
 import {closeMongoConnection} from "./mock/db-teste-module";
 
 describe.only('POST /v1/currency', () => {
@@ -14,7 +14,7 @@ describe.only('POST /v1/currency', () => {
         }).compile();
 
         app = module.createNestApplication();
-        app.useGlobalPipes(PipeValidationCommons());
+        app.useGlobalPipes(ValidationPipeCommons());
         await app.init();
     });
 

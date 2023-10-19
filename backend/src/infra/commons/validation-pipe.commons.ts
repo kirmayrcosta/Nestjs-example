@@ -1,6 +1,6 @@
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
 
-const PipeValidationCommons = () => {
+const ValidationPipeCommons = () => {
   return new ValidationPipe({
     exceptionFactory: (errors) => {
       const result = errors.map((error) => ({
@@ -13,4 +13,4 @@ const PipeValidationCommons = () => {
   });
 };
 
-export default PipeValidationCommons;
+export default ValidationPipeCommons;

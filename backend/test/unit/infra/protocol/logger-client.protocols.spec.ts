@@ -21,9 +21,12 @@ import {LoggerClientProtocols} from "../../../../src/infra/protocols/logger/logg
 describe('Given LoggerClientProtocol', () => {
     let loggerClientProtocols: LoggerClientProtocols;
     beforeEach(async () => {
+        process.env.NODE_ENV = 'TEST';
         loggerClientProtocols = new LoggerClientProtocols();
     });
     describe('Given setContext', () => {
+        process.env.NODE_ENV = 'PRODUCTION';
+        loggerClientProtocols = new LoggerClientProtocols();
         it('When call to setContext Should return context', async () => {
             const ctx = {
                 requestId: '123',
