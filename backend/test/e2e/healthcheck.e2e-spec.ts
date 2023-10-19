@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 
-describe.skip('AppController (e2e)', () => {
+describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -19,6 +19,6 @@ describe.skip('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('API is running!');
   });
 });

@@ -23,10 +23,10 @@ export class CurrencyRepository implements ICurrencyRepository {
   async findAll(): Promise<Array<Currency>> {
     const currencies = await this.currencyModel.find();
     const currenciesList = [];
-    for (const { _id, alias, quotes } of currencies) {
+    for (const { name, alias, quotes } of currencies) {
       currenciesList.push(
         new Currency({
-          idCurrency: _id.toString(),
+          name: name,
           alias: alias,
           quotes: quotes,
         }),
@@ -84,6 +84,7 @@ export class CurrencyRepository implements ICurrencyRepository {
       { alias: alias, 'quotes.alias': quoteAlias },
       {
         $set: {
+          'quotes.$.alias': quote.alias || quoteAlias,
           'quotes.$.price': quote.price,
         },
       },

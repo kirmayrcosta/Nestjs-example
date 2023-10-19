@@ -1,29 +1,62 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from '../../src/app.module';
+import {AppModuleMock} from "./mock/app.module.mock";
+import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
+import * as request from "supertest";
 
-describe.skip('GET /v1/currency/:alias', () => {
+describe('GET /v1/currency/:alias', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [AppModuleMock],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = module.createNestApplication();
+    app.useGlobalPipes(ValidationPipeCommons());
     await app.init();
   });
 
-  it('When call to get currency by alias Should return the currency', () => {
-    expect(true).toBe(false);
+  it('When call to get currency by alias Should return the currency', async () => {
+    await request(app.getHttpServer()).post('/v1/currency')
+        .set('Accept', 'application/json')
+        .send({
+          name: 'Brazilian Real',
+          alias: 'BRL',
+          quotes: [{
+            name: 'United States Dollar',
+            alias: 'USD',
+            price: 5
+          },{
+            name: 'Euro',
+            alias: 'EUR',
+            price: 6
+          }],
+        });
+
+    const response = await request(app.getHttpServer()).get('/v1/currency/BRL')
+        .set('Accept', 'application/json')
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      name: 'Brazilian Real',
+      alias: 'BRL',
+      quotes: [{
+        name: 'United States Dollar',
+        alias: 'USD',
+        price: 5
+      },{
+        name: 'Euro',
+        alias: 'EUR',
+        price: 6
+      }],
+    })
   });
 
-  it('When call to get nonexistent currency Should return no content ', () => {
-    expect(true).toBe(false);
-  });
+  it('When call to get nonexistent currency Should return no content ', async () => {
+    const response = await request(app.getHttpServer()).get('/v1/currency/BRL')
+        .set('Accept', 'application/json')
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({})
+    })
 
-  it('When call to get currency by alias Should return internal server error', () => {
-    expect(true).toBe(false);
-  });
 });
