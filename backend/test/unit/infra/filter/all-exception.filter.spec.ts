@@ -11,8 +11,20 @@ jest.mock("../../../../src/infra/protocols/logger/logger-client.protocols", () =
         }),
     };
 });
+jest.mock("../../../../src/infra/protocols/telemetry/metric-telemetry.protocol", () => {
+    return {
+        MetricTelemetryProtocol: jest.fn().mockImplementation(() => {
+            return {
+                start: jest.fn().mockReturnValue({}),
+                histogramRecord: jest.fn().mockReturnValue({}),
+            };
+        }),
+    };
+});
+
 import {LoggerClientProtocols} from "../../../../src/infra/protocols/logger/logger-client.protocols";
 import {HttpException} from "@nestjs/common";
+import {MetricTelemetryProtocol} from "../../../../src/infra/protocols/telemetry/metric-telemetry.protocol";
 
 
 const logger = {
@@ -26,6 +38,9 @@ const host = {
         getRequest: jest.fn().mockReturnValue({
             path: '/v1/currency',
             method: 'GET',
+            headers: {
+                'x-time': Date.now()
+            }
         }),
         getResponse: jest.fn().mockReturnValue({
             status: jest.fn().mockReturnValue({
@@ -45,7 +60,10 @@ describe('Given AllExceptionFilter', () => {
     let allExceptionFilter: AllExceptionFilter;
 
     beforeEach(async () => {
-        allExceptionFilter = new AllExceptionFilter(new LoggerClientProtocols());
+        allExceptionFilter = new AllExceptionFilter(
+            new LoggerClientProtocols(),
+            new MetricTelemetryProtocol()
+        );
     });
     it('When call to catch Exception Should return the response with internal error', async () => {
         allExceptionFilter.catch(new Error("Ocorreu um erro"), host as any);

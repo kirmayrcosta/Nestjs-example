@@ -1,6 +1,9 @@
 import { ILogger } from '../../../domain/protocols/ILogger';
 import { Injectable, LoggerService } from '@nestjs/common';
-import winston, { createLogger, transports } from 'winston';
+import winston, { createLogger, transports, format } from 'winston';
+
+/*eslint-disable */
+const LokiTransport = require('winston-loki');
 
 interface context {
   requestId?: string;
@@ -23,6 +26,13 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
       transports: [
         new transports.Console({
           silent,
+        }),
+        new LokiTransport({
+          host: 'http://127.0.0.1:3100',
+          json: true,
+          format: format.json(),
+          replaceTimestamp: true,
+          labels: { service: 'currency-service' },
         }),
       ],
     });
