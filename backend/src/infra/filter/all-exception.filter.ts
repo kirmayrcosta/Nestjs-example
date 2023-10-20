@@ -6,6 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { LoggerClientProtocols } from '../protocols/logger/logger-client.protocols';
+import { MetricTelemetryProtocol } from '../protocols/telemetry/metric-telemetry.protocol';
 
 interface IError {
   message: string;
@@ -13,11 +14,16 @@ interface IError {
 
 @Catch()
 export class AllExceptionFilter implements ExceptionFilter {
-  constructor(public readonly logger: LoggerClientProtocols) {}
+  constructor(
+    public readonly logger: LoggerClientProtocols,
+    public readonly metric: MetricTelemetryProtocol,
+  ) {}
+
   catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request: any = ctx.getRequest();
+    this.metric.start();
 
     const status =
       exception instanceof HttpException
@@ -36,6 +42,12 @@ export class AllExceptionFilter implements ExceptionFilter {
     };
 
     this.logMessage(request, message, status, exception);
+
+    this.metric.histogramRecord(Date.now() - request.headers['x-time'], {
+      method: request.method.toUpperCase(),
+      path: request.path.toUpperCase(),
+      statusCode: status,
+    });
     response.status(status).json(responseData);
   }
 
