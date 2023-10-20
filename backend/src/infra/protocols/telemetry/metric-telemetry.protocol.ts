@@ -6,27 +6,27 @@ import {
 } from '@opentelemetry/sdk-metrics';
 import { Resource } from '@opentelemetry/resources';
 import { metrics } from '@opentelemetry/api';
+import { EnvConfigService } from '../../config/env-config.service';
 // diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
 export class MetricTelemetryProtocol {
   histogram: any;
-  constructor() {
-    const otelMetricsInterval = 5000;
-
+  constructor(configService: EnvConfigService) {
     const metricExporter = new OTLPMetricExporter({
-      url: 'http://localhost:4317',
+      url: configService.getOtelExporterOtlpMetricEndpoint(),
     });
 
     const meterProvider = new MeterProvider({
       resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'currency-api',
+        [SemanticResourceAttributes.SERVICE_NAME]:
+          configService.getServiceName(),
       }),
     });
 
     meterProvider.addMetricReader(
       new PeriodicExportingMetricReader({
         exporter: metricExporter,
-        exportIntervalMillis: otelMetricsInterval,
+        exportIntervalMillis: configService.getOtelMetricsInterval(),
       }),
     );
 

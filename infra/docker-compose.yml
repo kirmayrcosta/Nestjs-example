@@ -41,6 +41,7 @@ services:
     ports:
       - "4317:4317"  # otlp grpc
       - "4318:4318"  # otlp http
+      - "8889:8889"  # prometheus
     networks:
       - loki
   tempo:

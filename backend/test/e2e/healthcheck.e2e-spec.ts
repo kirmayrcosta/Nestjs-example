@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import {AppModuleMock} from "./mock/app.module.mock";
-import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
+import { AppModuleMock } from './mock/app.module.mock';
+import ValidationPipeCommons from '../../src/infra/commons/validation-pipe.commons';
 
 describe('Given HealthCheck', () => {
   let app: INestApplication;

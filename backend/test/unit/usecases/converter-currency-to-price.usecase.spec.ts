@@ -1,21 +1,18 @@
 import { QuotesDto } from '../../../src/infra/controller/currency/dto/quotes.dto';
-import {ConverterCurrencyToPriceUseCase} from "../../../src/usecases/converter-currency-to-price.usecase";
-import {Currency} from "../../../src/domain/entities/currency.entity";
-import {Quote} from "../../../src/domain/entities/quote.entity";
-
-
+import { ConverterCurrencyToPriceUseCase } from '../../../src/usecases/converter-currency-to-price.usecase';
+import { Currency } from '../../../src/domain/entities/currency.entity';
+import { Quote } from '../../../src/domain/entities/quote.entity';
 
 describe('Given ConverterCurrencyToPriceUseCase', () => {
   let converterCurrencyToPriceUseCase: ConverterCurrencyToPriceUseCase;
 
   const currencyRepositoryMock = {
     findByAlias: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
-
     converterCurrencyToPriceUseCase = new ConverterCurrencyToPriceUseCase(
-        currencyRepositoryMock as any,
+      currencyRepositoryMock as any,
     );
   });
 
@@ -48,5 +45,11 @@ describe('Given ConverterCurrencyToPriceUseCase', () => {
     currencyRepositoryMock.findByAlias.mockReturnValue(currencyMock as any);
     const result = await converterCurrencyToPriceUseCase.exec('ABC', 1);
     expect(result).toEqual(mock);
+  });
+
+  it('When call currency to converter price and Should return quotes converted', async () => {
+    currencyRepositoryMock.findByAlias.mockReturnValue(undefined);
+    const result = await converterCurrencyToPriceUseCase.exec('ABC', 1);
+    expect(result).toEqual(null);
   });
 });

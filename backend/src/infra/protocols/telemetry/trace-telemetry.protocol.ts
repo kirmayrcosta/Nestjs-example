@@ -3,14 +3,16 @@ import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-grpc';
 import { Resource } from '@opentelemetry/resources';
 import * as opentelemetry from '@opentelemetry/sdk-node';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
+import { EnvConfigService } from '../../config/env-config.service';
 
 export class TraceTelemetryProtocol {
   private sdk: any;
 
-  constructor() {
+  constructor(configService: EnvConfigService) {
     const traceExporter = new OTLPTraceExporter({
-      url: 'http://localhost:4317',
+      url: configService.getOtelExporterOtlpTracesEndpoint(),
     });
+
     this.sdk = new opentelemetry.NodeSDK({
       traceExporter,
       instrumentations: [
@@ -20,8 +22,10 @@ export class TraceTelemetryProtocol {
           },
         }),
       ],
+
       resource: new Resource({
-        [SemanticResourceAttributes.SERVICE_NAME]: 'currency-api',
+        [SemanticResourceAttributes.SERVICE_NAME]:
+          configService.getServiceName(),
       }),
     });
   }

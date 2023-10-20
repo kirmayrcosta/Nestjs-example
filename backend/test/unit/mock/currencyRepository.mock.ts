@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { ICurrencyRepository } from '../../../src/domain/repository/ICurrencyRepository';
 import { Currency } from '../../../src/domain/entities/currency.entity';
 
