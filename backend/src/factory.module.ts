@@ -14,9 +14,10 @@ import { UpdateQuoteToCurrencyUsecase } from './usecases/update-quote-to-currenc
 import { AddQuoteToCurrencyUseCase } from './usecases/add-quote-to-currency.usecase';
 import { LoggerClientModule } from './infra/protocols/logger/logger-client.module';
 import { LoggerClientProtocols } from './infra/protocols/logger/logger-client.protocols';
+import { EnvConfigModule } from './infra/config/env-config.module';
 
 @Module({
-  imports: [RepositoriesModule],
+  imports: [RepositoriesModule, EnvConfigModule],
 })
 export class FactoryModule {
   static HEALTH_CHECK_USE_CASE = 'HealthCheckUseCase';

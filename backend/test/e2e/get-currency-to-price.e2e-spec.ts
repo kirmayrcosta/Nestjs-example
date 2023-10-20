@@ -1,9 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../src/app.module';
-import {AppModuleMock} from "./mock/app.module.mock";
-import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
+import { AppModuleMock } from './mock/app.module.mock';
+import ValidationPipeCommons from '../../src/infra/commons/validation-pipe.commons';
 
 describe('GET /v1/currency/converter/:alias/:price', () => {
   let app: INestApplication;
@@ -19,46 +18,53 @@ describe('GET /v1/currency/converter/:alias/:price', () => {
   });
 
   it('When call to get quote to currency Should return a list of quotes ', async () => {
-    await request(app.getHttpServer()).post('/v1/currency')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'Brazilian Real',
-          alias: 'BRL',
-          quotes: [{
+    await request(app.getHttpServer())
+      .post('/v1/currency')
+      .set('Accept', 'application/json')
+      .send({
+        name: 'Brazilian Real',
+        alias: 'BRL',
+        quotes: [
+          {
             name: 'United States Dollar',
             alias: 'USD',
-            price: 5
-          },{
+            price: 5,
+          },
+          {
             name: 'Euro',
             alias: 'EUR',
-            price: 6
-          }],
-        });
+            price: 6,
+          },
+        ],
+      });
 
-    const response = await request(app.getHttpServer()).get('/v1/currency/converter/BRL/2')
-        .set('Accept', 'application/json')
+    const response = await request(app.getHttpServer())
+      .get('/v1/currency/converter/BRL/2')
+      .set('Accept', 'application/json');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      "alias": "BRL",
-      "name": "Brazilian Real",
-      "quotes": [
+      alias: 'BRL',
+      name: 'Brazilian Real',
+      quotes: [
         {
-          "name": "United States Dollar",
-          "alias": "USD",
-          "price": 10
-        },{
-        "alias": "EUR",
-        "name": "Euro",
-        "price": 12,
-  }
-      ]
-    })
+          name: 'United States Dollar',
+          alias: 'USD',
+          price: 10,
+        },
+        {
+          alias: 'EUR',
+          name: 'Euro',
+          price: 12,
+        },
+      ],
+    });
   });
 
-  it('When call to get quote to noexistent currency Should return a emptylist of quotes',async () => {
-    const response = await request(app.getHttpServer()).get('/v1/currency/converter/BRL/2')
-        .set('Accept', 'application/json')
+  it('When call to get quote to noexistent currency Should return a emptylist of quotes', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/v1/currency/converter/BRL/2')
+      .set('Accept', 'application/json');
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({})
+    expect(response.body).toEqual({});
   });
 });

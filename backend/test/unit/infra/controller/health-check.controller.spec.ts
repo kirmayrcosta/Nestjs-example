@@ -33,6 +33,6 @@ describe('HeathCheck', () => {
 
   it('should be defined', () => {
     const result = healthCheckController.health();
-    expect(result).toBe("API is running!");
+    expect(result).toBe('API is running!');
   });
 });
