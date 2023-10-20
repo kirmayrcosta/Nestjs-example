@@ -1,7 +1,14 @@
-import { Controller, Get, Param, Inject } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Inject,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FactoryModule } from '../../../factory.module';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GetCurrencyUseCase } from '../../../usecases/get-currency.usecase';
+import { CacheInterceptor } from '../../interceptor/cache.interceptor';
 
 @Controller('v1/currency')
 @ApiTags('currency')
@@ -13,6 +20,7 @@ export class GetCurrencyController {
   ) {}
 
   @Get(':alias')
+  @UseInterceptors(CacheInterceptor)
   find(@Param('alias') alias: string) {
     return this.getCurrencyUseCase.exec(alias);
   }

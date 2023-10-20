@@ -11,9 +11,14 @@ import { AddQuoteToCurrencyController } from './currency/add-quote-to-currency.c
 import { UpdateQuoteToCurrencyController } from './currency/update-quote-to-currency.controller';
 import { RemoveQuoteToCurrencyController } from './currency/remove-quote-to-currency.controller';
 import { LoggerClientModule } from '../protocols/logger/logger-client.module';
+import { CacheInterceptorModule } from '../interceptor/cache.interceptor.module';
 
 @Module({
-  imports: [FactoryModule.register(), LoggerClientModule],
+  imports: [
+    FactoryModule.register(),
+    LoggerClientModule,
+    CacheInterceptorModule,
+  ],
   controllers: [
     HealthCheckController,
     ConverterCurrencyToPriceController,

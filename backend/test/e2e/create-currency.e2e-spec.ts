@@ -4,14 +4,16 @@ import * as request from 'supertest';
 import { AppModuleMock } from './mock/app.module.mock';
 import ValidationPipeCommons from '../../src/infra/commons/validation-pipe.commons';
 import { closeMongoConnection } from './mock/db-teste-module';
+import {CacheInterceptor} from "../../src/infra/interceptor/cache.interceptor";
+import {CacheInterceptorMock} from "./mock/cache.interceptor.mock";
 
-describe.only('Given POST /v1/currency', () => {
+describe('Given POST /v1/currency', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModuleMock],
-    }).compile();
+    }).overrideInterceptor(CacheInterceptor).useClass(CacheInterceptorMock).compile();
 
     app = module.createNestApplication();
     app.useGlobalPipes(ValidationPipeCommons());
