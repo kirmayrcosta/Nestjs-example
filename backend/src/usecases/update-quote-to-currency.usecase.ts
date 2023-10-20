@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ICurrencyRepository } from '../domain/repository/ICurrencyRepository';
 import { QuotesDto } from '../infra/controller/currency/dto/quotes.dto';
 import { Quote } from '../domain/entities/quote.entity';
@@ -9,11 +9,16 @@ export class UpdateQuoteToCurrencyUsecase {
 
   async exec(alias: string, quoteAlias: string, input: QuotesDto) {
     const quote = new Quote(input);
-    const quoteCreated = await this.currencyRepository.updateQuote(
-      alias,
-      quoteAlias,
-      quote,
-    );
-    return quoteCreated;
+
+    const getCurrency = await this.currencyRepository.findByAlias(alias);
+    if (!getCurrency) {
+      throw new BadRequestException('Currency not found');
+    }
+
+    if (!getCurrency.quotes.find((quote) => quote.alias === quoteAlias)) {
+      throw new BadRequestException('Quote already exists');
+    }
+
+    await this.currencyRepository.updateQuote(alias, quoteAlias, quote);
   }
 }

@@ -5,4 +5,6 @@ export class QuoteModel {
   alias: string;
   @Prop()
   price: number;
+  @Prop()
+  name: string;
 }

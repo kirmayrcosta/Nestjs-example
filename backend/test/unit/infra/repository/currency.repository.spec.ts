@@ -6,6 +6,7 @@ import {CurrencyRepository} from '../../../../src/infra/repository/currency.repo
 import {CurrencyModel} from '../../../../src/infra/schema/currency.schema';
 import {Currency} from '../../../../src/domain/entities/currency.entity';
 import {Quote} from '../../../../src/domain/entities/quote.entity';
+import {QuoteModel} from "../../../../src/infra/schema/quote.schema";
 
 describe('Given CurrencyRepository', () => {
     let currencyRepository: CurrencyRepository;
@@ -57,32 +58,37 @@ describe('Given CurrencyRepository', () => {
     describe('Given findAll', () => {
         it('should to list the currencies', async () => {
 
+            const quoteToUpdate = new QuoteModel();
+            quoteToUpdate.name = "test";
+            quoteToUpdate.alias = "USD";
+            quoteToUpdate.price = 5.0557;
             const mock = [
                 {
                     "_id": "6528396323ce3ba59e72f1be",
                     "name": "test",
                     "alias": "BRL",
-                    "quotes": [{"id": null, "alias": "USD", "price": 5.0557}],
-                    "__v": 0
-                },
-                {
-                    "_id": "652839e44370f34a593cc2f8",
-                    "name": "test",
-                    "alias": "BRL",
-                    "quotes": [{"id": null, "alias": "USD", "price": 5.0557}],
+                    "quotes": [quoteToUpdate]
+                        ,
                     "__v": 0
                 }
             ]
 
-            const result = [{
-                "alias": "BRL",
-                "name": "",
-                "quotes": [{"alias": "USD", "price": 5.0557}]
-            }, {"alias": "BRL", "name": "", "quotes": [{"alias": "USD", "price": 5.0557}]}]
+
+            const quoteModel = new Quote({
+                alias: 'USD',
+                name: 'test',
+                price: 5.0557,
+            })
+
+            const currencyResult = new Currency({
+                alias: 'BRL',
+                name: 'test',
+                quotes: [quoteModel],
+            })
 
             jest.spyOn(model, 'find').mockResolvedValue(mock as any);
             const currencyList = await currencyRepository.findAll();
-            expect(currencyList).toEqual(result);
+            expect(currencyList).toEqual([currencyResult]);
         });
     });
 
@@ -174,17 +180,21 @@ describe('Given CurrencyRepository', () => {
     describe('Given updateQuote', () => {
         it('When update quote to currency Should to return success', async () => {
 
-            const quote = new Quote({
-                alias: 'BRL',
-                price: 5.0,
-            });
+            const quote = new QuoteModel()
+            quote.alias = "BRL";
+            quote.price = 5.0;
 
 
             await currencyRepository.updateQuote("BRL", "USD", quote);
             expect(model.updateOne).toBeCalledWith({
                 alias: "BRL",
                 "quotes.alias": "USD"
-            }, {$set: {"quotes.$.price": quote.price}});
+            }, {
+                $set: {
+                    "quotes.$.alias": "BRL",
+                    "quotes.$.price": quote.price
+                }
+            });
         });
     });
 });

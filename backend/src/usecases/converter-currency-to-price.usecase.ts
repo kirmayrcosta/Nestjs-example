@@ -6,6 +6,9 @@ export class ConverterCurrencyToPriceUseCase {
   async exec(alias: string, price: number) {
     const currency = await this.currencyRepository.findByAlias(alias);
 
+    if (!currency) {
+      return null;
+    }
     return currency.toPrice(price);
   }
 }

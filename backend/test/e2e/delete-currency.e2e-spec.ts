@@ -7,15 +7,15 @@ import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commo
 describe('DELETE /v1/currency/:alias', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModuleMock],
-    }).compile();
+    beforeEach(async () => {
+        const module: TestingModule = await Test.createTestingModule({
+            imports: [AppModuleMock],
+        }).compile();
 
-    app = module.createNestApplication();
-    app.useGlobalPipes(ValidationPipeCommons());
-    await app.init();
-  });
+        app = module.createNestApplication();
+        app.useGlobalPipes(ValidationPipeCommons());
+        await app.init();
+    });
 
   it('When call to delete currency by alias Should return success with no content', async () => {
 
@@ -28,12 +28,6 @@ describe('DELETE /v1/currency/:alias', () => {
         });
 
     const result = await request(app.getHttpServer()).delete('/v1/currency/DEL')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'delete',
-          alias: 'DEL',
-          quotes: [],
-        });
 
     expect(result.status).toBe(204);
 
@@ -41,14 +35,13 @@ describe('DELETE /v1/currency/:alias', () => {
 
   it('When call to delete noexistent currency by alias Should return no content', async () => {
     const result = await request(app.getHttpServer()).delete('/v1/currency/DEL')
-        .set('Accept', 'application/json')
-        .send({
-          name: 'delete',
-          alias: 'DEL',
-          quotes: [],
-        });
 
-    expect(result.status).toBe(204);
+    expect(result.status).toBe(400);
+    expect(result.body).toEqual({
+        "message": "Currency not found",
+        "error": "Bad Request",
+        "statusCode": 400
+    });
 
   });
 

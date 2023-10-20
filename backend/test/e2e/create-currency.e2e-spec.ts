@@ -5,7 +5,7 @@ import {AppModuleMock} from "./mock/app.module.mock";
 import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
 import {closeMongoConnection} from "./mock/db-teste-module";
 
-describe.only('POST /v1/currency', () => {
+describe.only('Given POST /v1/currency', () => {
     let app: INestApplication;
 
     beforeEach(async () => {

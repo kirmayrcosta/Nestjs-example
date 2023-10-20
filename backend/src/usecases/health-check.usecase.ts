@@ -2,6 +2,6 @@ export class HealthCheckUseCase {
   constructor() {}
 
   exec(): string {
-    return 'Hello World!';
+    return 'API is running!';
   }
 }
