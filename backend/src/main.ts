@@ -1,3 +1,4 @@
+import trace from './infra/protocols/telemetry/trace';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -7,6 +8,7 @@ import ValidationPipeCommons from './infra/commons/validation-pipe.commons';
 import { AllExceptionFilter } from './infra/filter/all-exception.filter';
 
 async function bootstrap() {
+  trace.start();
   const [app] = await Promise.all([
     NestFactory.create(AppModule, {
       logger: new LoggerClientProtocols(),

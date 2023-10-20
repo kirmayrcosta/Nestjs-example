@@ -1,6 +1,5 @@
 import {Test, TestingModule} from '@nestjs/testing';
 import {DynamicModule} from '@nestjs/common';
-import {fakerDE as faker} from '@faker-js/faker';
 import {CreateCurrencyController} from "../../../../src/infra/controller/currency/create-currency.controller";
 import {LoggerClientModule} from "../../../../src/infra/protocols/logger/logger-client.module";
 
@@ -42,8 +41,8 @@ describe('CreateCurrencyController', () => {
     });
 
     it('When call to create Currency should return success', async () => {
-        const correlationId = faker.string.alpha(10);
-        const requestId = faker.string.alpha(10);
+        const correlationId = '123';
+        const requestId = '123';
         const alias = "BRL";
         const quoteDto = {alias: 'USD', value: 1};
         const createCurrencyDtoMock = {alias, quotes: [quoteDto]};

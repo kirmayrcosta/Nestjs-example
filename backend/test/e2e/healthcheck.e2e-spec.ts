@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import {AppModuleMock} from "./mock/app.module.mock";
 import ValidationPipeCommons from "../../src/infra/commons/validation-pipe.commons";
 
-describe('AppController (e2e)', () => {
+describe('Given HealthCheck', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

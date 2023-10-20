@@ -10,6 +10,9 @@ jest.mock("winston", () => ({
     createLogger: jest.fn().mockReturnValue(logger),
     transports: {
         Console: jest.fn()
+    },
+    format: {
+        json: jest.fn(),
     }
 }));
 
