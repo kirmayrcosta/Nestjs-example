@@ -7,6 +7,16 @@ import { GetCurrencyController } from '../../../../src/infra/controller/currency
 
 const GET_CURRENCY_USE_CASE = 'GetCurrencyUseCase';
 
+jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
+  return {
+    CacheInterceptor: jest.fn().mockImplementation(() => {
+      return {
+        intercept: jest.fn(),
+      };
+    }),
+  };
+})
+
 const mock = [
   {
     alias: 'ABD',

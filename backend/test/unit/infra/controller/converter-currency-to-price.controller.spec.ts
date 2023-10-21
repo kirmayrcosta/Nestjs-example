@@ -6,6 +6,16 @@ import { ConverterCurrencyToPriceController } from '../../../../src/infra/contro
 
 const CONVERTER_CURRENCY_TO_PRICE_USE_CASE = 'ConverterCurrencyToPriceUseCase';
 
+jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
+  return {
+    CacheInterceptor: jest.fn().mockImplementation(() => {
+      return {
+        intercept: jest.fn(),
+      };
+    }),
+  };
+})
+
 const resultMock = {
   alias: 'BRL',
   name: '',

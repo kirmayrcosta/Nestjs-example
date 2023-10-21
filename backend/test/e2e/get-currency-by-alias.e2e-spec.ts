@@ -3,6 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import { AppModuleMock } from './mock/app.module.mock';
 import ValidationPipeCommons from '../../src/infra/commons/validation-pipe.commons';
 import * as request from 'supertest';
+import {CacheInterceptor} from "../../src/infra/interceptor/cache.interceptor";
+import {CacheInterceptorMock} from "./mock/cache.interceptor.mock";
 
 describe('GET /v1/currency/:alias', () => {
   let app: INestApplication;
@@ -10,7 +12,7 @@ describe('GET /v1/currency/:alias', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModuleMock],
-    }).compile();
+    }).overrideInterceptor(CacheInterceptor).useClass(CacheInterceptorMock).compile();
 
     app = module.createNestApplication();
     app.useGlobalPipes(ValidationPipeCommons());

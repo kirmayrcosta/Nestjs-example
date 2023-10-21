@@ -11,6 +11,12 @@ networks:
         - subnet: 192.168.213.0/24
           gateway: 192.168.213.1
 services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    hostname: redis
+    ports:
+      - 6379:6379
   mongodb:
     image: mongo:latest
     container_name: mongodb
@@ -76,7 +82,7 @@ services:
     volumes:
       - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
       - ./grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
-      - ./dashboards:/var/lib/grafana/dashboards
+      - ./dashboard:/var/lib/grafana/dashboards
     image: grafana/grafana:latest
     ports:
       - "3001:3000"

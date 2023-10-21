@@ -4,6 +4,16 @@ import { DynamicModule } from '@nestjs/common';
 import { LoggerClientModule } from '../../../../src/infra/protocols/logger/logger-client.module';
 import { GetAllCurrencyController } from '../../../../src/infra/controller/currency/get-all-currency.controller';
 
+jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
+    return {
+        CacheInterceptor: jest.fn().mockImplementation(() => {
+        return {
+            intercept: jest.fn(),
+        };
+        }),
+    };
+})
+
 const GET_ALL_CURRENCY_USE_CASE = 'GetAllCurrencyUseCase';
 
 const mock = [
