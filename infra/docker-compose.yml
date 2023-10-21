@@ -11,10 +11,31 @@ networks:
         - subnet: 192.168.213.0/24
           gateway: 192.168.213.1
 services:
+  currency_api:
+    container_name: currency_api
+    hostname: currency_api
+    build:
+        context: ../backend
+    networks:
+      - mongodb_net
+      - loki
+    ports:
+        - 3000:3000
+    environment:
+      - ENV=DEVELOPMENT
+      - SERVICE_NAME=CURRENCY_API
+      - MONGODB_URI=mongodb://mongodb:27017/currency
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://otel-collector:4317
+      - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://otel-collector:4317
+      - OTEL_METRICS_INTERVAL=5000
+      - EXPORTER_LOG_ENDPOINT=http://loki:3100
+      - EXPORTER_CACHE_ENDPOINT=redis://redis:6379
   redis:
     image: redis:latest
     container_name: redis
     hostname: redis
+    networks:
+      - mongodb_net
     ports:
       - 6379:6379
   mongodb:
@@ -26,6 +47,7 @@ services:
     ports:
       - 27017:27017
   loki:
+    container_name: loki
     image: grafana/loki:2.9.0
     ports:
       - "3100:3100"
@@ -40,6 +62,7 @@ services:
     networks:
       - loki
   otel-collector:
+    container_name: otel-collector
     image: otel/opentelemetry-collector:0.86.0
     command: [ "--config=/etc/otel-collector.yaml" ]
     volumes:

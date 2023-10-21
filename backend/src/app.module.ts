@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ControllerModule } from './infra/controller/controller.module';
 import { EnvConfigModule } from './infra/config/env-config.module';
-import { redisStore } from 'cache-manager-redis-store';
+import { redisStore } from 'cache-manager-redis-yet';
 
 @Module({
   imports: [
@@ -13,8 +13,7 @@ import { redisStore } from 'cache-manager-redis-store';
     CacheModule.register({
       isGlobal: true,
       store: redisStore as any,
-      host: process.env.EXPORTER_LOG_ENDPOINT,
-      port: process.env.EXPORTER_LOG_PORT,
+      url: process.env.EXPORTER_CACHE_ENDPOINT,
     }),
     FactoryModule.register(),
     ConfigModule.forRoot(),
