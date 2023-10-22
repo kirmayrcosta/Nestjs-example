@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-api
+  labels:
+    app: currency-api
+spec:
+  selector:
+    matchLabels:
+      app: currency-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: currency-api
+    spec:
+      containers:
+        - name: currency-api
+          image: gcr.io/clever-spirit-402509/kirmayrcosta/currency-api:latest
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: currency-api-config
+              mountPath: /config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            httpGet:
+              path: /health
+              port: 3000
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 300m
+            requests:
+              memory: 1024Mi
+              cpu: 500m
+      imagePullSecrets:
+        - name: artifact-registry
+      volumes:
+        - name: currency-api-config
+          configMap:
+            name: "currency-api-configmap"

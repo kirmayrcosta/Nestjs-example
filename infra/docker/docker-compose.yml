@@ -12,10 +12,11 @@ networks:
           gateway: 192.168.213.1
 services:
   currency_api:
+    image: ghcr.io/kirmayrcosta/currency-api:develop
     container_name: currency_api
     hostname: currency_api
-    build:
-        context: ../backend
+#    build:
+#        context: ../backend
     networks:
       - mongodb_net
       - loki
