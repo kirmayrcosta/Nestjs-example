@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
         - name: currency-api
-          image: gcr.io/clever-spirit-402509/kirmayrcosta/currency-api:latest
+          image: gcr.io/clever-spirit-402509/kirmayrcosta/currency-api
+          envFrom:
+            - configMapRef:
+                name: currency-api-configmap
           ports:
             - containerPort: 3000
           volumeMounts:
