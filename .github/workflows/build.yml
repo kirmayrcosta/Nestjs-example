@@ -71,7 +71,7 @@ jobs:
       - name: Deploy
         run: |-
           cd ./infra/k8s/deploy
-          ./kustomize edit set image gcr.io/$PROJECT_ID/KIRMAYRCOSTA/$IMAGE:$GITHUB_SHA
+          ./kustomize edit set image gcr.io/clever-spirit-402509/kirmayrcosta/currency-api=gcr.io/clever-spirit-402509/kirmayrcosta/currency-api:$GITHUB_SHA
           ./kustomize build
           ./kustomize build | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME

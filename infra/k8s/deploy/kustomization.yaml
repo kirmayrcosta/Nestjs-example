@@ -10,7 +10,3 @@ configMapGenerator:
 - envs:
   - .env
   name: currency-api-configmap
-images:
-- name: node
-  newTag: 8.15.0
-

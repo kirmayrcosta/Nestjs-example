@@ -16,18 +16,19 @@ spec:
     spec:
       containers:
         - name: currency-api
-          image: gcr.io/clever-spirit-402509/kirmayrcosta/currency-api
+          image: gcr.io/clever-spirit-402509/kirmayrcosta/currency-api:lastest
           envFrom:
             - configMapRef:
                 name: currency-api-configmap
+          volumeMounts:
+            - name: currency-api-configmap
+              mountPath: .env
+              readOnly: true
           ports:
             - containerPort: 3000
-          volumeMounts:
-            - name: currency-api-config
-              mountPath: /config
           livenessProbe:
             httpGet:
-              path: /health
+              path: /
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 3
@@ -35,7 +36,7 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 10
             httpGet:
-              path: /health
+              path: /
               port: 3000
           resources:
             limits:
@@ -44,9 +45,9 @@ spec:
             requests:
               memory: 1024Mi
               cpu: 500m
+            volumes:
+              - name: currency-api-configmap
+                mountPath: .env
+                readOnly: true
       imagePullSecrets:
         - name: artifact-registry
-      volumes:
-        - name: currency-api-config
-          configMap:
-            name: "currency-api-configmap"
