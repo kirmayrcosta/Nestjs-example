@@ -5,6 +5,20 @@ import { DeleteCurrencyController } from '../../../../src/infra/controller/curre
 
 const DELETE_CURRENCY_USE_CASE = 'DeleteCurrencyUseCase';
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 class DeleteCurrencyUseCaseMock {
   exec(input): Promise<any> {
     return Promise.resolve(undefined);

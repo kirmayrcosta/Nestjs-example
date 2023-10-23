@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoggerClientProtocols } from '../protocols/logger/logger-client.protocols';
 import { v1 } from 'uuid';
-import { MetricTelemetryProtocol } from '../protocols/telemetry/metric-telemetry.protocol';
+import { MetricTelemetryProtocol } from '../protocols/metric/metric-telemetry.protocol';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {

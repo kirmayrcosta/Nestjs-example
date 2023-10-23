@@ -4,6 +4,21 @@ import { DynamicModule } from '@nestjs/common';
 import { LoggerClientModule } from '../../../../src/infra/protocols/logger/logger-client.module';
 import { GetAllCurrencyController } from '../../../../src/infra/controller/currency/get-all-currency.controller';
 
+
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
     return {
         CacheInterceptor: jest.fn().mockImplementation(() => {

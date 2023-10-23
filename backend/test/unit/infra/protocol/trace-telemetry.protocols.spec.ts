@@ -1,4 +1,4 @@
-import { TraceTelemetryProtocol } from '../../../../src/infra/protocols/telemetry/trace-telemetry.protocol';
+import { TraceTelemetryProtocol } from '../../../../src/infra/protocols/trace/trace-telemetry.protocol';
 import { ConfigService } from '@nestjs/config';
 import { EnvConfigService } from '../../../../src/infra/config/env-config.service';
 

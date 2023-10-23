@@ -18,6 +18,20 @@ class UseCaseFactoryModule {
     };
   }
 }
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 
 describe('HeathCheck', () => {
   let healthCheckController;

@@ -22,22 +22,30 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
   private method: string;
 
   constructor(configService: EnvConfigService) {
+
     const silent = process.env.NODE_ENV === 'TEST' ? true : false;
-    this._logger = createLogger({
-      transports: [
+    const transport = [
         new transports.Console({
           silent,
-        }),
-        new LokiTransport({
-          host: configService.getExporterLogEndpoint(),
-          basicAuth: configService.getExporterLogBasicAuth(),
-          json: true,
-          format: format.json(),
-          replaceTimestamp: true,
-          timeout: 2000,
-          labels: { service: configService.getServiceName() }
-        }),
-      ],
+        })
+    ]
+
+    if(!silent) {
+      transport.push(
+          new LokiTransport({
+            host: configService.getExporterLogEndpoint(),
+            basicAuth: configService.getExporterLogBasicAuth(),
+            json: true,
+            format: format.json(),
+            replaceTimestamp: true,
+            timeout: 2000,
+            labels: { service: configService.getServiceName() }
+          })
+      )
+    }
+
+    this._logger = createLogger({
+      transports: transport
     });
   }
 

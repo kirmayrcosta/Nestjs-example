@@ -6,7 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { LoggerClientProtocols } from '../protocols/logger/logger-client.protocols';
-import { MetricTelemetryProtocol } from '../protocols/telemetry/metric-telemetry.protocol';
+import { MetricTelemetryProtocol } from '../protocols/metric/metric-telemetry.protocol';
 
 interface IError {
   message: string;
