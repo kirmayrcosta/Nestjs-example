@@ -8,8 +8,15 @@ POST http://localhost:3000/v1/currency
 Content-Type: application/json
 
 {
-  "name": "Real",
-  "alias": "BR"
+"name": "Real",
+"alias": "BRL",
+"quotes": [
+{
+  "name": "Dolar",
+  "alias": "USD",
+  "price": 5.0557
+}
+]
 }
 
 
@@ -36,7 +43,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/v1/currency/ABD
+GET http://localhost:3000/v1/currency/BRL
 Content-Type: application/json
 
 ###
