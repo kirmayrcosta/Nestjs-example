@@ -24,4 +24,8 @@ export class EnvConfigService {
   getExporterLogEndpoint() {
     return this.configService.get('EXPORTER_LOG_ENDPOINT');
   }
+
+  getExporterLogBasicAuth() {
+    return this.configService.get('EXPORTER_LOG_BASIC_AUTH');
+  }
 }

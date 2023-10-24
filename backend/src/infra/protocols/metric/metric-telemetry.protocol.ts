@@ -7,9 +7,10 @@ import {
 import { Resource } from '@opentelemetry/resources';
 import { metrics } from '@opentelemetry/api';
 import { EnvConfigService } from '../../config/env-config.service';
+import { IMetric } from '../../../domain/protocols/IMetric';
 // diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.DEBUG);
 
-export class MetricTelemetryProtocol {
+export class MetricTelemetryProtocol implements IMetric {
   histogram: any;
   constructor(configService: EnvConfigService) {
     const metricExporter = new OTLPMetricExporter({

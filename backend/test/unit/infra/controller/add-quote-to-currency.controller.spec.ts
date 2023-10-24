@@ -5,6 +5,20 @@ import { IAddQuoteToCurrencyUsecase } from '../../../../src/usecases/add-quote-t
 import { QuotesDto } from '../../../../src/infra/controller/currency/dto/quotes.dto';
 const ADD_QUOTATION_TO_CURRENCY_USE_CASE = 'AddQuotationToCurrencyUseCase';
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 class AddQuoteToCurrencyUseCaseMock implements IAddQuoteToCurrencyUsecase {
   exec(alias, input: QuotesDto): Promise<any> {
     return Promise.resolve(undefined);

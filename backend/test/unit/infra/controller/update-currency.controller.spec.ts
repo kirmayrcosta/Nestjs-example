@@ -5,6 +5,20 @@ import { UpdateCurrencyController } from '../../../../src/infra/controller/curre
 
 const UPDATE_CURRENCY_USE_CASE = 'UpdateCurrencyUseCase';
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 class UpdateCurrecyUseCaseMock {
   exec(): Promise<any> {
     return Promise.resolve(undefined);

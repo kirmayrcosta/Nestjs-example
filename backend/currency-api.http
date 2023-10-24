@@ -8,8 +8,15 @@ POST http://localhost:3000/v1/currency
 Content-Type: application/json
 
 {
-  "name": "Real",
-  "alias": "BR"
+"name": "Real",
+"alias": "BRD",
+"quotes": [
+{
+  "name": "Dolar",
+  "alias": "USD",
+  "price": 5.0557
+}
+]
 }
 
 
@@ -36,12 +43,12 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/v1/currency/ABD
+GET http://localhost:3000/v1/currency/BRL
 Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/v1/currency/converter/BRL/2
+GET http://localhost:3000/v1/currency/converter/BRL/1234.3
 Content-Type: application/json
 
 ###
@@ -51,11 +58,11 @@ Content-Type: application/json
 
 {
   "name": "Teste de atualizacao",
-  "alias": "ABD",
+  "alias": "BRL",
   "quotes": [
     {
       "alias": "USD",
-      "price": 5.0557
+      "price": 5.0551
     }
   ]
 }
@@ -67,23 +74,25 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/v1/currency/ABD/quotes
+POST http://localhost:3000/v1/currency/BRL/quotes
 Content-Type: application/json
 
 {
+  "name": "ABC",
   "alias": "ABC",
   "price": 3.00
 }
 
 ###
-PUT http://localhost:3000/v1/currency/ABD/quotes/ABC
+PUT http://localhost:3000/v1/currency/BRL/quotes/ABC
 Content-Type: application/json
 
 {
-  "alias": "BRL",
+  "name": "ABC",
+  "alias": "ABC",
   "price": 4.00
 }
 
 ###
 
-DELETE http://localhost:3000/v1/currency/ABD/quotes/USD
+DELETE http://localhost:3000/v1/currency/BRL/quotes/ABC

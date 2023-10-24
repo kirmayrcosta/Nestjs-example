@@ -7,6 +7,7 @@ import { GetCurrencyController } from '../../../../src/infra/controller/currency
 
 const GET_CURRENCY_USE_CASE = 'GetCurrencyUseCase';
 
+
 jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
   return {
     CacheInterceptor: jest.fn().mockImplementation(() => {
@@ -16,6 +17,20 @@ jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
     }),
   };
 })
+
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
 
 const mock = [
   {

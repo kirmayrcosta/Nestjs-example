@@ -2,4 +2,4 @@ backend/node_modules
 backend/dist
 backend/coverage
 /infra/tempo-data/
-/infra/tmp/
+/infra/docker/tmp/

@@ -39,7 +39,7 @@ export class CacheInterceptor implements NestInterceptor {
     return next.handle().pipe(
       tap((responseBody) => {
         const ttl: Milliseconds = 10000;
-        this.cacheService.set(key, responseBody, ttl);
+        this.cacheService.set(key, responseBody || {}, ttl);
       }),
     );
   }

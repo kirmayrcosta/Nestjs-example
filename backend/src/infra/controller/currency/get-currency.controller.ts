@@ -6,13 +6,20 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FactoryModule } from '../../../factory.module';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { GetCurrencyUseCase } from '../../../usecases/get-currency.usecase';
 import { CacheInterceptor } from '../../interceptor/cache.interceptor';
 
 @Controller('v1/currency')
 @ApiTags('currency')
-@ApiResponse({ status: 500, description: 'Internal Server Error' })
+@ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
+@ApiBadRequestResponse({ description: 'Currency with invalid param' })
+@ApiOkResponse({ description: 'Currency foud with success' })
 export class GetCurrencyController {
   constructor(
     @Inject(FactoryModule.GET_CURRENCY_USE_CASE)

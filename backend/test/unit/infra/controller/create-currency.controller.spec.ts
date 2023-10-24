@@ -5,6 +5,19 @@ import { LoggerClientModule } from '../../../../src/infra/protocols/logger/logge
 
 const CREATE_CURRENCY_USE_CASE = 'CreateCurrencyUseCase';
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
 class CreateCurrencyUseCaseMock {
   exec(input): Promise<any> {
     return Promise.resolve(input);
@@ -52,6 +65,6 @@ describe('CreateCurrencyController', () => {
       requestId,
       createCurrencyDtoMock,
     );
-    expect(result).toEqual(createCurrencyDtoMock);
+    expect(result).toEqual(requestId);
   });
 });

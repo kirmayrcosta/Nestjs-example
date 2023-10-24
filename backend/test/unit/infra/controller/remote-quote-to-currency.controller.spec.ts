@@ -7,6 +7,19 @@ import { RemoveQuoteToCurrencyController } from '../../../../src/infra/controlle
 const REMOVE_QUOTATION_TO_CURRENCY_USE_CASE =
   'RemoveQuotationToCurrencyUseCase';
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
 class RemoveQuoteToCurrencyUsecaseMock {
   // eslint-disable-line @typescript-eslint/no-unused-vars
   exec(input, alias): Promise<any> {

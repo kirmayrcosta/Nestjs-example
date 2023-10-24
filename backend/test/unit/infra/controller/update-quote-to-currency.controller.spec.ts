@@ -6,6 +6,20 @@ import { UpdateQuoteToCurrencyController } from '../../../../src/infra/controlle
 const UPDATE_QUOTATION_TO_CURRENCY_USE_CASE =
   'UpdateQuotationToCurrencyUseCase';
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 class UpdateQuotationToCurrencyUseCaseMock {
   exec(): Promise<any> {
     return Promise.resolve(undefined);

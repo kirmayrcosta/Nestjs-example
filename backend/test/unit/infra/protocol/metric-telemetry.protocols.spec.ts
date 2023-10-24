@@ -1,4 +1,4 @@
-import { MetricTelemetryProtocol } from '../../../../src/infra/protocols/telemetry/metric-telemetry.protocol';
+import { MetricTelemetryProtocol } from '../../../../src/infra/protocols/metric/metric-telemetry.protocol';
 
 jest.mock('@opentelemetry/sdk-metrics', () => {
   return {

@@ -23,6 +23,10 @@ jobs:
         working-directory: ./backend
         run: npm install
 
+      - name: Executação de verificação de vulnerabilidades
+        working-directory: ./backend
+        run: npm audit
+
       - name: Executacao de lint de código
         working-directory: ./backend
         run: npm run lint

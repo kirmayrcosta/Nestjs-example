@@ -1,11 +1,18 @@
 import { Controller, Param, Delete, Inject, HttpCode } from '@nestjs/common';
 import { FactoryModule } from '../../../factory.module';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiInternalServerErrorResponse,
+  ApiNoContentResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { DeleteCurrencyUseCase } from '../../../usecases/delete-currency.usecase';
 
 @Controller('v1/currency')
 @ApiTags('currency')
-@ApiResponse({ status: 500, description: 'Internal Server Error' })
+@ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
+@ApiBadRequestResponse({ description: 'Currency with invalid fields.' })
+@ApiNoContentResponse({ description: 'Currency was deleted' })
 export class DeleteCurrencyController {
   constructor(
     @Inject(FactoryModule.DELETE_CURRENCY_USE_CASE)

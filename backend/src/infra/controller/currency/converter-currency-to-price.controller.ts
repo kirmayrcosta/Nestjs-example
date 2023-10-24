@@ -7,13 +7,20 @@ import {
 } from '@nestjs/common';
 import { FactoryModule } from '../../../factory.module';
 import { ConverterCurrencyToPriceUseCase } from '../../../usecases/converter-currency-to-price.usecase';
-import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiInternalServerErrorResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CurrencyToPriceOutputDto } from './dto/currency-to-price.dto';
 import { CacheInterceptor } from '../../interceptor/cache.interceptor';
 
 @Controller('v1/currency')
 @ApiTags('currency')
-@ApiResponse({ status: 500, description: 'Internal Server Error' })
+@ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
+@ApiBadRequestResponse({ description: 'Bad Request' })
+@ApiOkResponse({ description: 'Currency was converted to quote' })
 export class ConverterCurrencyToPriceController {
   constructor(
     @Inject(FactoryModule.CONVERTER_CURRENCY_TO_PRICE_USE_CASE)

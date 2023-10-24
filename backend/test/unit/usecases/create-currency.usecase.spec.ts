@@ -27,7 +27,7 @@ describe('Given CreateCurrecyUseCase', () => {
 
     jest.spyOn(currecyRepositoryMock, 'create').mockResolvedValue(input as any);
 
-    const result = await createCurrencyUseCase.exec(input, {});
+    const result = await createCurrencyUseCase.exec(input);
     expect(result).toBe(input);
   });
 
@@ -45,7 +45,7 @@ describe('Given CreateCurrecyUseCase', () => {
       .spyOn(currecyRepositoryMock, 'findByAlias')
       .mockResolvedValue(input as any);
 
-    expect(createCurrencyUseCase.exec(input, {})).rejects.toThrowError(
+    expect(createCurrencyUseCase.exec(input)).rejects.toThrowError(
       new BadRequestException('Currency already exists'),
     );
   });

@@ -1,10 +1,15 @@
 import { ConfigService, ConfigModule } from '@nestjs/config';
 import { EnvConfigService } from './infra/config/env-config.service';
-import { TraceTelemetryProtocol } from './infra/protocols/telemetry/trace-telemetry.protocol';
+import { TraceTelemetryProtocol } from './infra/protocols/trace/trace-telemetry.protocol';
+
+const ignoreEnvFile = process.env.NODE_ENV === 'PRODUCTION';
+
 ConfigModule.forRoot({
+  ignoreEnvFile,
   isGlobal: true,
   envFilePath: '.env',
 });
+
 const configService = new ConfigService();
 const envConfigService = new EnvConfigService(configService);
 const trace = new TraceTelemetryProtocol(envConfigService);
@@ -21,7 +26,8 @@ import { LoggerClientProtocols } from './infra/protocols/logger/logger-client.pr
 import { LoggingInterceptor } from './infra/interceptor/logger.interceptor';
 import ValidationPipeCommons from './infra/commons/validation-pipe.commons';
 import { AllExceptionFilter } from './infra/filter/all-exception.filter';
-import { MetricTelemetryProtocol } from './infra/protocols/telemetry/metric-telemetry.protocol';
+import { MetricTelemetryProtocol } from './infra/protocols/metric/metric-telemetry.protocol';
+import { TimeoutInterceptor } from './infra/interceptor/timeout.interceptor';
 
 async function bootstrap() {
   const [app] = await Promise.all([
@@ -43,6 +49,9 @@ async function bootstrap() {
       new MetricTelemetryProtocol(envConfigService),
     ),
   );
+
+  app.useGlobalInterceptors(new TimeoutInterceptor());
+
   app.useGlobalPipes(ValidationPipeCommons());
 
   const config = new DocumentBuilder()
@@ -52,10 +61,8 @@ async function bootstrap() {
     .addTag('currency')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
-  await app.listen(3000).catch((error) => {
-    console.log(error);
-  });
+  SwaggerModule.setup('swagger', app, document);
+  await app.listen(3000);
 
   // gracefully shut down the SDK on process exit
   process.on('SIGTERM', () => {
@@ -66,4 +73,5 @@ async function bootstrap() {
       .finally(() => process.exit(0));
   });
 }
+
 bootstrap();

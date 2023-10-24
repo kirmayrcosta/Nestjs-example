@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Inject, Headers } from '@nestjs/common';
+import { Controller, Post, Body, Inject } from '@nestjs/common';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { CreateCurrecyUseCase } from '../../../usecases/create-currecy.usecase';
 import { FactoryModule } from '../../../factory.module';
@@ -8,7 +8,6 @@ import {
   ApiInternalServerErrorResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { LoggerClientProtocols } from '../../protocols/logger/logger-client.protocols';
 
 @Controller('v1/currency')
 @ApiTags('currency')
@@ -19,25 +18,10 @@ export class CreateCurrencyController {
   constructor(
     @Inject(FactoryModule.CREATE_CURRENCY_USE_CASE)
     private readonly createCurrencyUseCase: CreateCurrecyUseCase,
-    private readonly logger: LoggerClientProtocols,
   ) {}
 
   @Post()
-  async create(
-    @Headers('x-request-id') requestId: string,
-    @Headers('x-correlation-id') correlationId: string,
-    @Body() createCurrencyDto: CreateCurrencyDto,
-  ) {
-    const ctx = this.logger.setCtx({
-      requestId,
-      correlationId,
-      path: '/',
-      method: 'GET',
-    });
-    const currency = await this.createCurrencyUseCase.exec(
-      createCurrencyDto,
-      ctx,
-    );
-    return currency;
+  async create(@Body() createCurrencyDto: CreateCurrencyDto) {
+    return this.createCurrencyUseCase.exec(createCurrencyDto);
   }
 }

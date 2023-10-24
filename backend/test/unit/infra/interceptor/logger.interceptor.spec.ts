@@ -15,7 +15,7 @@ jest.mock(
 );
 
 jest.mock(
-  '../../../../src/infra/protocols/telemetry/metric-telemetry.protocol',
+  '../../../../src/infra/protocols/metric/metric-telemetry.protocol',
   () => {
     return {
       MetricTelemetryProtocol: jest.fn().mockImplementation(() => {
@@ -28,7 +28,7 @@ jest.mock(
   },
 );
 import { LoggerClientProtocols } from '../../../../src/infra/protocols/logger/logger-client.protocols';
-import { MetricTelemetryProtocol } from '../../../../src/infra/protocols/telemetry/metric-telemetry.protocol';
+import { MetricTelemetryProtocol } from '../../../../src/infra/protocols/metric/metric-telemetry.protocol';
 import { ConfigService } from '@nestjs/config';
 import { EnvConfigService } from '../../../../src/infra/config/env-config.service';
 

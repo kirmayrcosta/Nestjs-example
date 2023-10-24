@@ -16,6 +16,20 @@ jest.mock("../../../../src/infra/interceptor/cache.interceptor", () => {
   };
 })
 
+jest.mock(
+    '../../../../src/infra/protocols/logger/logger-client.protocols',
+    () => {
+      return {
+        LoggerClientProtocols: jest.fn().mockImplementation(() => {
+          return {
+            setCtx: jest.fn().mockReturnValue({}),
+            log: jest.fn(),
+          };
+        }),
+      };
+    },
+);
+
 const resultMock = {
   alias: 'BRL',
   name: '',

@@ -12,13 +12,18 @@ exporters:
   logging:
     verbosity: detailed
   prometheus:
-    endpoint: "0.0.0.0:8889"
+    endpoint: 0.0.0.0:8889
 
 service:
   pipelines:
     traces:
-      receivers: [otlp]
-      exporters: [otlp]
+      receivers:
+        - otlp
+      exporters:
+        - logging
+        - otlp
     metrics:
-      receivers: [otlp]
-      exporters: [logging, prometheus]
+      receivers:
+        - otlp
+      exporters:
+        - prometheus
