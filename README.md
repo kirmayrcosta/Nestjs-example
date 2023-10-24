@@ -1,7 +1,24 @@
 # currency-api
-
-
 [![ci](https://github.com/kirmayrcosta/currency-api/actions/workflows/build.yml/badge.svg)](https://github.com/kirmayrcosta/currency-api/actions/workflows/build.yml) [![Cobertura de código](https://codecov.io/github/kirmayrcosta/currency-api/graph/badge.svg?token=PMRG48CYZT)](https://codecov.io/github/kirmayrcosta/currency-api)
+
+
+* [Introdução](#introdução)
+* [Estrutura do projeto](#estrutura-do-projeto)
+* [Rodando projeto localmente](#rodando-projeto-localmente)
+* [Arquitetura do Projeto](#arquitetura-do-projeto)
+  * [Componentes de serviços do projeto](#componentes-de-serviços-do-projeto)
+* [Documentação da API](#documentação-da-api)
+* [Cenários de caso de uso](#cenários-de-caso-de-uso)
+* [Pipeline](#pipeline)
+  * [Pipeline de CI - Pull Request](#pipeline-de-ci---pull-request)
+  * [Pipeline de CI - Merge Request](#pipeline-de-ci---merge-request)
+* [Resiliência](#resiliência)
+* [Estrutura de observabilidade](#estrutura-de-observabilidade)
+  * [Tracing](#tracing)
+  * [Log e Métricas](#log-e-métricas)
+
+* [Autor](#autor)
+
 
 
 # Introdução
@@ -39,6 +56,38 @@ O projeto foi desenvolvido utilizando o padrão Clean Architecture, que consiste
 │   ├── docker # Arquivos de configuração do docker
 │   ├── k8s # Arquivos de configuração do kubernetes para deploy
 ```
+
+# Rodando projeto localmente
+
+Para executar o projeto, é necessário ter o Docker e o Docker Compose instalados. Para executar o projeto, basta executar o seguinte comando:
+
+- Node 18.4.0
+- NPM 6.14.14
+- Docker 20.10.14
+- Docker Compose 1.29.2
+
+Subindo componentes de infraestrutura
+
+```bash
+cd infra/docker
+docker-compose up -d
+```
+
+Subindo backend
+    
+``` bash
+
+cd backend
+
+# Instalando dependências
+npm install
+
+# Executando projeto
+npm run start:dev
+```
+
+
+
 
 
 # Arquitetura do Projeto
@@ -119,7 +168,7 @@ Outras mecanismo como Circuit Breaker, Retry, throttling  seriam interessantem s
 ## Estrutura de Observabilidade
 
 
-#Métricas
+# Métricas
 
 Para estrutura de métrica, foi criado um dashboard com grafana coletando dados do prometheus. Algumas consutas de top requisições e também de latência foram criadas para exemplificar a analise de performance da aplicação
 

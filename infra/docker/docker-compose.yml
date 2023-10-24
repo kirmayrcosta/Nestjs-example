@@ -1,22 +1,23 @@
 version: '2'
 
 services:
-  currency_api:
-    container_name: currency_api
-    hostname: currency_api
-    build:
-        context: ../../backend
-    ports:
-        - 3000:3000
-    environment:
-      - ENV=DEVELOPMENT
-      - SERVICE_NAME=CURRENCY_API
-      - MONGODB_URI=mongodb://mongodb:27017/currency
-      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://otel-collector:4317
-      - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://otel-collector:4317
-      - OTEL_METRICS_INTERVAL=5000
-      - EXPORTER_LOG_ENDPOINT=http://loki:3100
-      - EXPORTER_CACHE_ENDPOINT=redis://redis:6379
+# Teste sem build de projeto em container
+#  currency_api:
+#    container_name: currency_api
+#    hostname: currency_api
+#    build:
+#        context: ../../backend
+#    ports:
+#        - 3000:3000
+#    environment:
+#      - ENV=DEVELOPMENT
+#      - SERVICE_NAME=CURRENCY_API
+#      - MONGODB_URI=mongodb://mongodb:27017/currency
+#      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://otel-collector:4317
+#      - OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://otel-collector:4317
+#      - OTEL_METRICS_INTERVAL=5000
+#      - EXPORTER_LOG_ENDPOINT=http://loki:3100
+#      - EXPORTER_CACHE_ENDPOINT=redis://redis:6379
   redis:
     image: redis:latest
     container_name: redis
