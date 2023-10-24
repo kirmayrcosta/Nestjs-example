@@ -1,4 +1,4 @@
 export interface ITrace {
-    start(): void;
-    shutdown(): void;
+  start(): void;
+  shutdown(): void;
 }

@@ -11,8 +11,7 @@ export class CreateCurrecyUseCase {
     private readonly logger: LoggerClientMock,
   ) {}
 
-  async exec(input: CreateCurrencyDto, ctx: any): Promise<Currency> {
-    this.logger.setCtx(ctx);
+  async exec(input: CreateCurrencyDto): Promise<Currency> {
     const currency = new Currency(input);
     const currencyExist = await this.currencyRepository.findByAlias(
       currency.alias,
@@ -21,7 +20,6 @@ export class CreateCurrecyUseCase {
       this.logger.error('Currency already exists', 'CreateCurrecyUseCase');
       throw new BadRequestException('Currency already exists');
     }
-    const currencyCreate = await this.currencyRepository.create(currency);
-    return currencyCreate;
+    return this.currencyRepository.create(currency);
   }
 }

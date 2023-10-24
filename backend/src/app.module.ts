@@ -13,7 +13,7 @@ import { redisStore } from 'cache-manager-redis-yet';
     CacheModule.register({
       isGlobal: true,
       store: redisStore as any,
-        url: process.env.EXPORTER_CACHE_URL,
+      url: process.env.EXPORTER_CACHE_URL,
     }),
     FactoryModule.register(),
     ConfigModule.forRoot(),

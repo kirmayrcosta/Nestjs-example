@@ -292,49 +292,6 @@
     },
     {
       "datasource": {
-        "type": "tempo",
-        "uid": "P214B5B846CF3925F"
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "id": 1,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "tempo",
-            "uid": "P214B5B846CF3925F"
-          },
-          "filters": [
-            {
-              "id": "d52fa48d",
-              "operator": "=",
-              "scope": "span"
-            }
-          ],
-          "limit": 20,
-          "queryType": "traceqlSearch",
-          "refId": "A"
-        }
-      ],
-      "title": "Panel Title",
-      "type": "logs"
-    },
-    {
-      "datasource": {
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
@@ -436,79 +393,6 @@
     },
     {
       "datasource": {
-        "type": "tempo",
-        "uid": "P214B5B846CF3925F"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 8
-      },
-      "id": 2,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.1.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "tempo",
-            "uid": "P214B5B846CF3925F"
-          },
-          "filters": [
-            {
-              "id": "3d9e1411",
-              "operator": "=",
-              "scope": "span"
-            }
-          ],
-          "limit": 20,
-          "query": "$TraceId | {}",
-          "queryType": "traceql",
-          "refId": "A"
-        }
-      ],
-      "title": "New Panel",
-      "type": "table"
-    },
-    {
-      "datasource": {
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
@@ -605,33 +489,6 @@
       ],
       "title": "Panel Title",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "tempo",
-        "uid": "P214B5B846CF3925F"
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 16
-      },
-      "id": 3,
-      "targets": [
-        {
-          "datasource": {
-            "type": "tempo",
-            "uid": "P214B5B846CF3925F"
-          },
-          "limit": 20,
-          "query": "$TraceId",
-          "queryType": "traceql",
-          "refId": "A"
-        }
-      ],
-      "title": "New Panel",
-      "type": "traces"
     }
   ],
   "refresh": "",
@@ -670,6 +527,6 @@
   "timezone": "",
   "title": "Currency API",
   "uid": "ada10937-815a-4c28-820c-a4db6c3451db",
-  "version": 1,
+  "version": 9,
   "weekStart": ""
 }

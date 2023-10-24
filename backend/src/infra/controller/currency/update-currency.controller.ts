@@ -1,12 +1,17 @@
 import { Controller, Body, Param, Inject, Put } from '@nestjs/common';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { FactoryModule } from '../../../factory.module';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiInternalServerErrorResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UpdateCurrecyUseCase } from '../../../usecases/update-currecy.usecase';
 
 @Controller('v1/currency')
 @ApiTags('currency')
-@ApiResponse({ status: 500, description: 'Internal Server Error' })
+@ApiInternalServerErrorResponse({ description: 'Internal Server Error' })
+@ApiBadRequestResponse({ description: 'Currency with invalid param' })
 export class UpdateCurrencyController {
   constructor(
     @Inject(FactoryModule.UPDATE_CURRENCY_USE_CASE)

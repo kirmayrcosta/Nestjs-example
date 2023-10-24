@@ -5,9 +5,9 @@ import * as opentelemetry from '@opentelemetry/sdk-node';
 import { SemanticResourceAttributes } from '@opentelemetry/semantic-conventions';
 import { EnvConfigService } from '../../config/env-config.service';
 
-import {ITrace} from "../../../domain/protocols/ITrace";
+import { ITrace } from '../../../domain/protocols/ITrace';
 
-export class TraceTelemetryProtocol  implements ITrace {
+export class TraceTelemetryProtocol implements ITrace {
   private sdk: any;
 
   constructor(configService: EnvConfigService) {

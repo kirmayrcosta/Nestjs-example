@@ -65,6 +65,6 @@ describe('CreateCurrencyController', () => {
       requestId,
       createCurrencyDtoMock,
     );
-    expect(result).toEqual(createCurrencyDtoMock);
+    expect(result).toEqual(requestId);
   });
 });

@@ -30,11 +30,12 @@ export class LoggerClientProtocols implements LoggerService, ILogger {
         })
     ]
 
+
     if(!silent) {
       transport.push(
           new LokiTransport({
             host: configService.getExporterLogEndpoint(),
-            basicAuth: configService.getExporterLogBasicAuth(),
+            basicAuth: configService.getExporterLogBasicAuth() || undefined,
             json: true,
             format: format.json(),
             replaceTimestamp: true,
